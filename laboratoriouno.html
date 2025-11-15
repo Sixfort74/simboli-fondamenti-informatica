@@ -1,1102 +1,1246 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Riepilogo Laboratorio 1 - JavaScript</title>
-  <style>
-    body {font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;max-width:1200px;margin:0 auto;padding:20px;color:#333;background-color:#f9f9f9;}
-    header {background:linear-gradient(135deg,#2c3e50,#3498db);color:white;padding:30px;border-radius:10px;margin-bottom:30px;text-align:center;box-shadow:0 4px 6px rgba(0,0,0,0.1);position:relative;}
-    h1 {margin:0;font-size:2.5em;}
-    h2 {color:#2c3e50;border-bottom:2px solid #3498db;padding-bottom:10px;margin-top:40px;}
-    h3 {color:#3498db;margin-top:25px;}
-    .lesson {background-color:white;padding:25px;margin-bottom:30px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-    .tip {background-color:#e8f4fd;border-left:4px solid #3498db;padding:15px;margin:20px 0;border-radius:0 5px 5px 0;}
-    .warning {background-color:#fde8e8;border-left:4px solid #e74c3c;padding:15px;margin:20px 0;border-radius:0 5px 5px 0;}
-    .important {background-color:#fff9e6;border-left:4px solid #f39c12;padding:15px;margin:20px 0;border-radius:0 5px 5px 0;}
-    code {background-color:#f4f4f4;padding:2px 6px;border-radius:3px;font-family:'Courier New',Courier,monospace;}
-    pre {background-color:#2c3e50;color:#ecf0f1;padding:15px;border-radius:5px;overflow-x:auto;line-height:1.4;}
-    .example {background-color:#f8f9fa;border:1px solid #e9ecef;padding:15px;border-radius:5px;margin:15px 0;}
-    .concept-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin:20px 0;}
-    .concept-card {background-color:white;border:1px solid #e0e0e0;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,0.05);}
-    .concept-card h4 {margin-top:0;color:#2c3e50;border-bottom:1px solid #eee;padding-bottom:10px;}
-    .table-container {overflow-x:auto;margin:20px 0;border-radius:5px;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
-    table {width:100%;border-collapse:collapse;min-width:600px;background-color:white;}
-    th,td {padding:12px 15px;text-align:left;border-bottom:1px solid #e0e0e0;}
-    th {background-color:#3498db;color:white;font-weight:600;position:sticky;top:0;}
-    tr:hover {background-color:#f5f9fd;}
-    .table-center td {text-align:center;}
-    .table-compact th,.table-compact td {padding:8px 12px;}
-    footer {text-align:center;margin-top:50px;padding:20px;color:#7f8c8d;font-size:0.9em;}
-    .true-cell {background-color:#e8f6ef;color:#27ae60;font-weight:bold;text-align:center;}
-    .false-cell {background-color:#fdedec;color:#e74c3c;font-weight:bold;text-align:center;}
-    .quick-nav {background-color:white;padding:15px;border-radius:8px;margin-bottom:20px;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-    .quick-nav ul {display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0;}
-    .quick-nav li {margin:0;}
-    .quick-nav a {display:block;padding:8px 15px;background-color:#f4f6f7;border-radius:4px;text-decoration:none;color:#2c3e50;transition:all .3s;}
-    .quick-nav a:hover {background-color:#3498db;color:white;}
-    .print-btn {position:absolute;top:20px;right:20px;background-color:#2ecc71;color:white;border:none;padding:10px 20px;border-radius:5px;cursor:pointer;font-weight:bold;transition:all .3s;box-shadow:0 2px 5px rgba(0,0,0,0.2);}
-    .print-btn:hover {background-color:#27ae60;transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,0.2);}
-    .search-container {position:absolute;top:20px;right:170px;display:flex;align-items:center;gap:8px;}
-    #searchInput {padding:8px 12px;border:1px solid #ccc;border-radius:4px;font-size:14px;width:600px;outline:none;transition:border .3s;}
-    #searchInput:focus {border-color:#3498db;box-shadow:0 0 0 2px rgba(52,152,219,0.2);}
-    .search-btn {background:#3498db;color:white;border:none;padding:8px 12px;border-radius:4px;cursor:pointer;font-weight:bold;font-size:16px;}
-    .search-btn:hover {background:#2980b9;}
-    .clear-btn {background:#e74c3c;color:white;border:none;padding:8px 12px;border-radius:4px;cursor:pointer;font-weight:bold;font-size:16px;}
-    .clear-btn:hover {background:#c0392b;}
-    @media print {.quick-nav,.print-btn,.search-container{display:none;}body{background-color:white;padding:0;margin:0;}.lesson{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid;}h2{page-break-after:avoid;}pre{background-color:#f5f5f5;color:#333;border:1px solid #ddd;}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riepilogo Laboratorio 1 - JavaScript</title>
+    <!-- Favicon semplice (data URI per emoji-like) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    <!-- Meta OpenGraph per sharing -->
+    <meta property="og:title" content="Riepilogo Laboratorio 1 - JavaScript">
+    <meta property="og:description" content="Concetti fondamentali, trucchi e punti di attenzione">
+    <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'><rect width='300' height='200' fill='%233498db'/><text x='150' y='100' font-size='20' text-anchor='middle' fill='white'>JS Notes</text></svg>">
+    <style>
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --header-bg: linear-gradient(135deg, #2c3e50, #3498db);
+            --lesson-bg: white;
+            --tip-bg: #e8f4fd;
+            --warning-bg: #fde8e8;
+            --important-bg: #fff9e6;
+            --code-bg: #2c3e50;
+            --code-color: #ecf0f1;
+            --border-color: #3498db;
+        }
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ecf0f1;
+            --header-bg: linear-gradient(135deg, #34495e, #5dade2);
+            --lesson-bg: #2c3e50;
+            --tip-bg: #34495e;
+            --warning-bg: #5d3a3a;
+            --important-bg: #5d4a1a;
+            --code-bg: #34495e;
+            --code-color: #ecf0f1;
+            --border-color: #5dade2;
+        }
+        body {font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;max-width:1200px;margin:0 auto;padding:20px;color:var(--text-color);background-color:var(--bg-color);}
+        header {background:var(--header-bg);color:white;padding:30px;border-radius:10px;margin-bottom:30px;text-align:center;box-shadow:0 4px 6px rgba(0,0,0,0.1);position:relative;}
+        h1 {margin:0;font-size:2.5em;}
+        h2 {color:#2c3e50;border-bottom:2px solid var(--border-color);padding-bottom:10px;margin-top:40px;}
+        h3 {color:var(--border-color);margin-top:25px;}
+        .lesson {background-color:var(--lesson-bg);padding:25px;margin-bottom:30px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+        .tip {background-color:var(--tip-bg);border-left:4px solid var(--border-color);padding:15px;margin:20px 0;border-radius:0 5px 5px 0;}
+        .warning {background-color:var(--warning-bg);border-left:4px solid #e74c3c;padding:15px;margin:20px 0;border-radius:0 5px 5px 0;}
+        .important {background-color:var(--important-bg);border-left:4px solid #f39c12;padding:15px;margin:20px 0;border-radius:0 5px 5px 0;}
+        code {background-color:#f4f4f4;padding:2px 6px;border-radius:3px;font-family:'Courier New',Courier,monospace;}
+        pre {background-color:var(--code-bg);color:var(--code-color);padding:15px;border-radius:5px;overflow-x:auto;line-height:1.4;position:relative;}
+        .copy-btn {position:absolute;top:5px;right:5px;background:#3498db;color:white;border:none;padding:5px 8px;border-radius:3px;cursor:pointer;font-size:12px;opacity:0;transition:opacity 0.3s;z-index:1;}
+        pre:hover .copy-btn {opacity:1;}
+        .example {background-color:#f8f9fa;border:1px solid #e9ecef;padding:15px;border-radius:5px;margin:15px 0;}
+        .concept-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin:20px 0;}
+        .concept-card {background-color:var(--lesson-bg);border:1px solid #e0e0e0;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,0.05);}
+        .concept-card h4 {margin-top:0;color:#2c3e50;border-bottom:1px solid #eee;padding-bottom:10px;}
+        .table-container {overflow-x:auto;margin:20px 0;border-radius:5px;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
+        table {width:100%;border-collapse:collapse;min-width:600px;background-color:var(--lesson-bg);}
+        th,td {padding:12px 15px;text-align:left;border-bottom:1px solid #e0e0e0;}
+        th {background-color:var(--border-color);color:white;font-weight:600;position:sticky;top:0;}
+        tr:hover {background-color:#f5f9fd;}
+        .table-center td {text-align:center;}
+        .table-compact th,.table-compact td {padding:8px 12px;}
+        footer {text-align:center;margin-top:50px;padding:20px;color:#7f8c8d;font-size:0.9em;}
+        .true-cell {background-color:#e8f6ef;color:#27ae60;font-weight:bold;text-align:center;}
+        .false-cell {background-color:#fdedec;color:#e74c3c;font-weight:bold;text-align:center;}
+        .quick-nav {background-color:var(--lesson-bg);padding:15px;border-radius:8px;margin-bottom:20px;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:sticky;top:0;z-index:100;}
+        .quick-nav ul {display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0;}
+        .quick-nav li {margin:0;}
+        .quick-nav a {display:block;padding:8px 15px;background-color:#f4f6f7;border-radius:4px;text-decoration:none;color:#2c3e50;transition:all .3s;}
+        .quick-nav a:hover {background-color:var(--border-color);color:white;}
+        .print-btn {position:absolute;top:20px;right:20px;background-color:#2ecc71;color:white;border:none;padding:10px 20px;border-radius:5px;cursor:pointer;font-weight:bold;transition:all .3s;box-shadow:0 2px 5px rgba(0,0,0,0.2);}
+        .print-btn:hover {background-color:#27ae60;transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,0.2);}
+        #searchInput {padding:8px 12px;border:1px solid #ccc;border-radius:4px;font-size:14px;width:600px;outline:none;transition:border .3s;}
+        #searchInput:focus {border-color:var(--border-color);box-shadow:0 0 0 2px rgba(52,152,219,0.2);}
+        .search-btn {background:var(--border-color);color:white;border:none;padding:8px 12px;border-radius:4px;cursor:pointer;font-weight:bold;font-size:16px;}
+        .search-btn:hover {background:#2980b9;}
+        .clear-btn {background:#e74c3c;color:white;border:none;padding:8px 12px;border-radius:4px;cursor:pointer;font-weight:bold;font-size:16px;}
+        .clear-btn:hover {background:#c0392b;}
+        /* Back to Top Button */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: var(--border-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        #backToTop:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+        #backToTop.show {
+            display: flex;
+        }
+        /* Dark Mode Toggle */
+        .theme-toggle {position:absolute;top:20px;left:20px;background:none;border:1px solid white;color:white;padding:8px 12px;border-radius:4px;cursor:pointer;transition:all .3s;}
+        .theme-toggle:hover {background:rgba(255,255,255,0.1);}
+        /* Quiz Styling */
+        .quiz {margin:20px 0;padding:15px;border:1px solid #ddd;border-radius:5px;background:#f8f9fa;}
+        .quiz h4 {margin-top:0;}
+        .quiz input[type="radio"] {margin-right:5px;}
+        .quiz button {background:#3498db;color:white;border:none;padding:8px 15px;border-radius:4px;cursor:pointer;margin-top:10px;}
+        .quiz button:hover {background:#2980b9;}
+        .quiz-result {margin-top:10px;font-weight:bold;}
+        /* Responsive Tables */
+        @media (max-width: 768px) {
+            .table-container {font-size:0.9em;}
+            #searchInput {width:100%;margin-bottom:10px;}
+            .quick-nav ul {flex-direction:column;}
+        }
+        @media print {.quick-nav,.print-btn,#backToTop,.theme-toggle,.copy-btn{display:none;}body{background-color:white;padding:0;margin:0;}.lesson{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid;}h2{page-break-after:avoid;}pre{background-color:#f5f5f5;color:#333;border:1px solid #ddd;}}
+    </style>
 </head>
-<body>
+<body data-theme="light">
+    <header>
+        <h1>Riepilogo Laboratorio 1 - JavaScript</h1>
+        <p>Concetti fondamentali, trucchi e punti di attenzione</p>
+        <button class="print-btn" onclick="window.print()" aria-label="Stampa la pagina">STAMPA</button>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambia tema (chiaro/scuro)">🌙</button>
+    </header>
 
-<header>
-  <h1>Riepilogo Laboratorio 1 - JavaScript</h1>
-  <p>Concetti fondamentali, trucchi e punti di attenzione</p>
+	<details class="quick-nav" open>
+		<summary style="cursor:pointer;padding:10px;font-weight:bold;border-bottom:1px solid #ddd;">📋 Navigazione Rapida</summary>
+		<ul>
+			<li><a href="#lezione1">🚀 Lezione 1: Primo programma e basi</a></li>
+			<li><a href="#lezione2">📦 Lezione 2: Variabili e tipi di dato</a></li>
+			<li><a href="#lezione3">🔢 Lezione 3: Operatori e controllo del flusso</a></li>
+			<li><a href="#lezione4">📊 Lezione 4: Array e oggetti</a></li>
+			<li><a href="#lezione5">⚙️ Lezione 5: Funzioni e scope</a></li>
+			<li><a href="#lezione6">🔄 Lezione 6: Metodi array avanzati</a></li>
+			<li><a href="#lezione7">📈 Lezione 7: Ordinamenti e oggetti complessi</a></li>
+			<li><a href="#lezione8">🔢 Lezione 8: Rappresentazione dati e binari</a></li>
+			<li><a href="#lezione9">🔤 Lezione 9: Operatori bitwise</a></li>
+			<li><a href="#lezione10">♻️ Lezione 10: Funzioni avanzate e ricorsione</a></li>
+			<li><a href="#lezione11">🔄 Lezione 11: Ricorsione avanzata</a></li>
+			<li><a href="#riepilogo">📝 Riepilogo generale</a></li>
+		</ul>
+	</details>
 
-  <!-- Barra di ricerca + STAMPA -->
-  <button class="print-btn" onclick="window.print()">STAMPA</button>
-</header>
-
-<div class="quick-nav">
-  <ul>
-    <li><a href="#lezione1">Lezione 1</a></li>
-    <li><a href="#lezione2">Lezione 2</a></li>
-    <li><a href="#lezione3">Lezione 3</a></li>
-    <li><a href="#lezione4">Lezione 4</a></li>
-    <li><a href="#lezione5">Lezione 5</a></li>
-    <li><a href="#lezione6">Lezione 6</a></li>
-    <li><a href="#lezione7">Lezione 7</a></li>
-    <li><a href="#lezione8">Lezione 8</a></li>
-    <li><a href="#lezione9">Lezione 9</a></li>
-    <li><a href="#lezione10">Lezione 10</a></li>
-    <li><a href="#lezione11">Lezione 11</a></li>
-    <li><a href="#riepilogo">Riepilogo</a></li>
-  </ul>
-</div>
-
-<!-- ====================== LEZIONE 1 ====================== -->
-<div class="lesson" id="lezione1">
-    <input type="text" id="searchInput" placeholder="Cerca nel riepilogo..." onkeypress="if(event.key==='Enter')searchText()">
-    <button class="search-btn" onclick="searchText()">Cerca</button>
-    <button class="clear-btn" onclick="clearSearch()">Pulisci</button>
-  <h2>Lezione 1: Il Primo Programma e le Basi della Programmazione</h2>
-  <h3>Cos'è un Programma</h3>
-  <p>Un <strong>programma</strong> è una sequenza ordinata di istruzioni che dicono al computer quali azioni eseguire e in quale ordine. Il computer non ragiona né interpreta l'intenzione del programmatore: segue alla lettera ogni istruzione. Per questo motivo è fondamentale la precisione sintattica.</p>
-  <div class="important"><strong>NOTA BENE:</strong> Un singolo carattere mancante, come una parentesi o una virgoletta, può interrompere completamente l'esecuzione del programma.</div>
-
-  <h3>Cos'è JavaScript</h3>
-  <p><strong>JavaScript</strong> è un linguaggio di scripting interpretato. Ciò significa che il codice viene letto ed eseguito riga per riga da un interprete, ad esempio il browser. È un linguaggio versatile, utilizzato sia per il <em>front-end</em> (interfaccia utente) sia per il <em>back-end</em> (server, tramite Node.js).</p>
-  <div class="tip"><strong>TRUCCO:</strong> Con un linguaggio interpretato puoi modificare e rieseguire subito il codice senza doverlo compilare: ideale per imparare e sperimentare.</div>
-
-  <h3>Il Primo Programma</h3>
-  <p>Il comando <code>console.log()</code> permette di stampare un messaggio nella console del browser. È la prima istruzione usata per testare e comprendere il funzionamento del codice.</p>
-  <div class="example"><pre>// Il primo programma in JavaScript
-console.log("Ciao, mondo!");</pre></div>
-  <ul>
-    <li><code>console</code> è un oggetto fornito dal browser per inviare messaggi di debug.</li>
-    <li><code>log()</code> è il metodo che effettua la stampa sulla console.</li>
-    <li>Le virgolette definiscono una <em>stringa</em>, cioè una sequenza di caratteri testuali.</li>
-  </ul>
-  <div class="tip"><strong>TRUCCO:</strong> Puoi stampare più valori in un'unica istruzione separandoli con virgole:
-    <div class="example"><pre>let nome = "Andrea";
+    <!-- ====================== LEZIONE 1 ====================== -->
+    <div class="lesson" id="lezione1">
+        <input type="text" id="searchInput" placeholder="Cerca nel riepilogo..." onkeypress="if(event.key==='Enter')searchText()" tabindex="0">
+        <button class="search-btn" onclick="searchText()" aria-label="Avvia ricerca">Cerca</button>
+        <button class="clear-btn" onclick="clearSearch()" aria-label="Pulisci ricerca">Pulisci</button>
+        <h2>🚀 Lezione 1: Il Primo Programma e le Basi della Programmazione</h2>
+        <h3>Cos'è un Programma</h3>
+        <p>Un <strong>programma</strong> è una sequenza ordinata di istruzioni che dicono al computer quali azioni eseguire e in quale ordine. Il computer non ragiona né interpreta l'intenzione del programmatore: segue alla lettera ogni istruzione. Per questo motivo è fondamentale la precisione sintattica.</p>
+        <div class="important"><strong>NOTA BENE:</strong> Un singolo carattere mancante, come una parentesi o una virgoletta, può interrompere completamente l'esecuzione del programma.</div>
+        <h3>Cos'è JavaScript</h3>
+        <p><strong>JavaScript</strong> è un linguaggio di scripting interpretato. Ciò significa che il codice viene letto ed eseguito riga per riga da un interprete, ad esempio il browser. È un linguaggio versatile, utilizzato sia per il <em>front-end</em> (interfaccia utente) sia per il <em>back-end</em> (server, tramite Node.js).</p>
+        <div class="tip"><strong>TRUCCO:</strong> Con un linguaggio interpretato puoi modificare e rieseguire subito il codice senza doverlo compilare: ideale per imparare e sperimentare.</div>
+        <h3>Il Primo Programma</h3>
+        <p>Il comando <code>console.log()</code> permette di stampare un messaggio nella console del browser. È la prima istruzione usata per testare e comprendere il funzionamento del codice.</p>
+        <div class="example">
+            <pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+// Il primo programma in JavaScript
+console.log("Ciao, mondo!");
+</pre>
+        </div>
+        <ul>
+            <li><code>console</code> è un oggetto fornito dal browser per inviare messaggi di debug.</li>
+            <li><code>log()</code> è il metodo che effettua la stampa sulla console.</li>
+            <li>Le virgolette definiscono una <em>stringa</em>, cioè una sequenza di caratteri testuali.</li>
+        </ul>
+        <div class="tip"><strong>TRUCCO:</strong> Puoi stampare più valori in un'unica istruzione separandoli con virgole: <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let nome = "Andrea";
 let eta = 25;
-console.log("Mi chiamo", nome, "e ho", eta, "anni.");</pre></div>
-  </div>
-  <div class="warning"><strong>ATTENZIONE:</strong> Se dimentichi le virgolette intorno al testo, JavaScript cercherà una variabile con quel nome e restituirà un errore:
-    <div class="example"><pre>console.log(Ciao); // ReferenceError: Ciao is not defined</pre></div>
-  </div>
-
-  <h3>Commenti nel Codice</h3>
-  <p>I <strong>commenti</strong> sono porzioni di testo che l'interprete ignora, ma che servono al programmatore per spiegare cosa fa il codice. Aiutano a mantenere il codice leggibile e a collaborare con altri.</p>
-  <div class="example"><pre>// Questo è un commento su una sola riga
+console.log("Mi chiamo", nome, "e ho", eta, "anni.");
+</pre></div> </div>
+        <div class="warning"><strong>ATTENZIONE:</strong> Se dimentichi le virgolette intorno al testo, JavaScript cercherà una variabile con quel nome e restituirà un errore: <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>console.log(Ciao); // ReferenceError: Ciao is not defined
+</pre></div> </div>
+        <h3>Commenti nel Codice</h3>
+        <p>I <strong>commenti</strong> sono porzioni di testo che l'interprete ignora, ma che servono al programmatore per spiegare cosa fa il codice. Aiutano a mantenere il codice leggibile e a collaborare con altri.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Questo è un commento su una sola riga
 /* Questo è un commento su più righe */</pre></div>
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li><code>console.log()</code> è il comando base per mostrare informazioni.</li>
-      <li>I commenti servono per documentare, non influenzano il comportamento del programma.</li>
-      <li>Le istruzioni terminano preferibilmente con <code>;</code> per chiarezza e compatibilità.</li>
-    </ul>
-  </div>
-</div>
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li><code>console.log()</code> è il comando base per mostrare informazioni.</li>
+                <li>I commenti servono per documentare, non influenzano il comportamento del programma.</li>
+                <li>Le istruzioni terminano preferibilmente con <code>;</code> per chiarezza e compatibilità.</li>
+            </ul>
+        </div>
+        <!-- Quiz Rapido -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Cos'è console.log()?</h4>
+            <p>Quale istruzione stampa un messaggio nella console?</p>
+            <input type="radio" name="q1" value="a"> a) alert()<br>
+            <input type="radio" name="q1" value="b"> b) console.log()<br>
+            <input type="radio" name="q1" value="c"> c) print()<br>
+            <button onclick="checkQuiz('q1', 'b', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+    </div>
 
-<!-- ====================== LEZIONE 2 ====================== -->
-<div class="lesson" id="lezione2">
-  <h2>Lezione 2: Variabili e Tipi di Dato in JavaScript</h2>
-  <h3>Che cos'è una Variabile</h3>
-  <p>Una <strong>variabile</strong> è uno spazio di memoria in cui viene memorizzato un valore. Possiamo immaginarla come una "scatola" etichettata: l'etichetta è il nome, e il contenuto è il valore. Le variabili servono per conservare dati che potranno cambiare durante l'esecuzione del programma.</p>
-  <div class="example"><pre>let nome = "Andrea";
+    <!-- ====================== LEZIONE 2 ====================== -->
+    <div class="lesson" id="lezione2">
+        <h2>📦 Lezione 2: Variabili e Tipi di Dato in JavaScript</h2>
+        <h3>Che cos'è una Variabile</h3>
+        <p>Una <strong>variabile</strong> è uno spazio di memoria in cui viene memorizzato un valore. Possiamo immaginarla come una "scatola" etichettata: l'etichetta è il nome, e il contenuto è il valore. Le variabili servono per conservare dati che potranno cambiare durante l'esecuzione del programma.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let nome = "Andrea";
 let eta = 25;
 console.log(nome, eta);</pre></div>
-
-  <h3>Dichiarare le Variabili</h3>
-  <p>In JavaScript esistono tre parole chiave per dichiarare variabili:</p>
-  <ul>
-    <li><code>var</code> - vecchio metodo, ha visibilità globale o di funzione (da evitare oggi);</li>
-    <li><code>let</code> - moderna, con visibilità limitata al blocco (<em>block scope</em>);</li>
-    <li><code>const</code> - costante, non può essere riassegnata dopo l'inizializzazione.</li>
-  </ul>
-  <div class="tip"><strong>TRUCCO:</strong> Usa sempre <code>let</code> o <code>const</code> invece di <code>var</code>. <code>const</code> per i valori che non cambiano, <code>let</code> per quelli che cambiano.</div>
-
-  <h3>Tipi di Dato Primitivi</h3>
-  <p>I <strong>tipi primitivi</strong> sono i mattoni fondamentali del linguaggio. Non sono oggetti e non hanno metodi propri, ma rappresentano valori semplici.</p>
-  <div class="concept-grid">
-    <div class="concept-card"><h4>Number</h4><p>Rappresenta numeri interi e decimali:</p><ul><li><code>42</code>, <code>-3.14</code></li><li>Valori speciali: <code>Infinity</code>, <code>-Infinity</code>, <code>NaN</code></li></ul></div>
-    <div class="concept-card"><h4>String</h4><p>Testo racchiuso tra virgolette:</p><ul><li>Doppie virgolette: <code>"testo"</code></li><li>Apici singoli: <code>'testo'</code></li><li>Backtick (template literal): <code>`testo`</code></li></ul></div>
-    <div class="concept-card"><h4>Boolean</h4><p>Valori di verità logica:</p><ul><li><code>true</code></li><li><code>false</code></li></ul></div>
-    <div class="concept-card"><h4>Valori Speciali</h4><ul><li><code>undefined</code> → variabile dichiarata ma non inizializzata;</li><li><code>null</code> → assenza intenzionale di valore;</li></ul></div>
-  </div>
-  <div class="tip"><strong>TRUCCO:</strong> I <em>template literal</em> (backtick) permettono di inserire variabili o espressioni all'interno di una stringa con la sintassi <code>${...}</code>.
-    <div class="example"><pre>let nome = "Andrea";
+        <h3>Dichiarare le Variabili</h3>
+        <p>In JavaScript esistono tre parole chiave per dichiarare variabili:</p>
+        <ul>
+            <li><code>var</code> - vecchio metodo, ha visibilità globale o di funzione (da evitare oggi);</li>
+            <li><code>let</code> - moderna, con visibilità limitata al blocco (<em>block scope</em>);</li>
+            <li><code>const</code> - costante, non può essere riassegnata dopo l'inizializzazione.</li>
+        </ul>
+        <div class="tip"><strong>TRUCCO:</strong> Usa sempre <code>let</code> o <code>const</code> invece di <code>var</code>. <code>const</code> per i valori che non cambiano, <code>let</code> per quelli che cambiano.</div>
+        <h3>Tipi di Dato Primitivi</h3>
+        <p>I <strong>tipi primitivi</strong> sono i mattoni fondamentali del linguaggio. Non sono oggetti e non hanno metodi propri, ma rappresentano valori semplici.</p>
+        <div class="concept-grid">
+            <div class="concept-card"><h4>Number</h4><p>Rappresenta numeri interi e decimali:</p><ul><li><code>42</code>, <code>-3.14</code></li><li>Valori speciali: <code>Infinity</code>, <code>-Infinity</code>, <code>NaN</code></li></ul></div>
+            <div class="concept-card"><h4>String</h4><p>Testo racchiuso tra virgolette:</p><ul><li>Doppie virgolette: <code>"testo"</code></li><li>Apici singoli: <code>'testo'</code></li><li>Backtick (template literal): <code>`testo`</code></li></ul></div>
+            <div class="concept-card"><h4>Boolean</h4><p>Valori di verità logica:</p><ul><li><code>true</code></li><li><code>false</code></li></ul></div>
+            <div class="concept-card"><h4>Valori Speciali</h4><ul><li><code>undefined</code> → variabile dichiarata ma non inizializzata;</li><li><code>null</code> → assenza intenzionale di valore;</li></ul></div>
+        </div>
+        <div class="tip"><strong>TRUCCO:</strong> I <em>template literal</em> (backtick) permettono di inserire variabili o espressioni all'interno di una stringa con la sintassi <code>${...}</code>. <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let nome = "Andrea";
 let eta = 25;
-console.log(`Mi chiamo ${nome} e ho ${eta} anni.`);</pre></div>
-  </div>
+console.log(`Mi chiamo ${nome} e ho ${eta} anni.`);</pre></div> </div>
+        <h3>Type Coercion (Conversione Automatica di Tipo)</h3>
+        <p>JavaScript converte automaticamente i tipi di dato in alcune operazioni. Questo comportamento, detto <em>type coercion</em>, può portare a risultati inattesi.</p>
+        <div class="warning"><strong>ATTENZIONE:</strong> Esempi di conversione automatica: <div class="example"><code>"5" + 3</code> → <code>"53"</code> (concatenazione)<br><code>"5" - 3</code> → <code>2</code> (sottrazione numerica)</div> </div>
+        <div class="important"><strong>NOTA BENE:</strong> Usa sempre <code>===</code> (uguaglianza stretta) e <code>!==</code> (diversità stretta) per evitare conversioni implicite indesiderate.</div>
+        <h3>Valori Falsy e Truthy</h3>
+        <p>Quando un valore viene valutato in un contesto booleano (ad esempio in un <code>if</code>), JavaScript lo considera "vero" o "falso" anche se non è un booleano.</p>
+        <div class="example"><strong>Falsy:</strong> <code>false</code>, <code>0</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code><br><strong>Truthy:</strong> tutti gli altri valori (inclusi <code>[]</code> e <code>{}</code>)</div>
+        <h3>Input e Output</h3>
+        <ul>
+            <li><code>console.log()</code> → stampa dati sulla console;</li>
+            <li><code>prompt()</code> → chiede un valore all'utente e restituisce una <em>stringa</em>.</li>
+        </ul>
+        <div class="tip"><strong>TRUCCO:</strong> Poiché <code>prompt()</code> restituisce sempre una stringa, se hai bisogno di un numero convertilo con <code>Number()</code> o <code>parseInt()</code>. <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let eta = Number(prompt("Inserisci la tua età:"));
+console.log(`Hai ${eta} anni.`);</pre></div> </div>
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li>Usa <code>let</code> e <code>const</code> per dichiarare variabili moderne.</li>
+                <li>I tipi primitivi sono Number, String, Boolean, Undefined e Null.</li>
+                <li>Fai attenzione alle conversioni automatiche di tipo.</li>
+                <li>Preferisci sempre <code>===</code> per confronti sicuri.</li>
+            </ul>
+        </div>
+        <!-- Quiz Rapido -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Quale parola chiave per costanti?</h4>
+            <p>Per una variabile che non cambia, usa:</p>
+            <input type="radio" name="q2" value="a"> a) var<br>
+            <input type="radio" name="q2" value="b"> b) let<br>
+            <input type="radio" name="q2" value="c"> c) const<br>
+            <button onclick="checkQuiz('q2', 'c', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+    </div>
 
-  <h3>Type Coercion (Conversione Automatica di Tipo)</h3>
-  <p>JavaScript converte automaticamente i tipi di dato in alcune operazioni. Questo comportamento, detto <em>type coercion</em>, può portare a risultati inattesi.</p>
-  <div class="warning"><strong>ATTENZIONE:</strong> Esempi di conversione automatica:
-    <div class="example"><code>"5" + 3</code> → <code>"53"</code> (concatenazione)<br><code>"5" - 3</code> → <code>2</code> (sottrazione numerica)</div>
-  </div>
-  <div class="important"><strong>NOTA BENE:</strong> Usa sempre <code>===</code> (uguaglianza stretta) e <code>!==</code> (diversità stretta) per evitare conversioni implicite indesiderate.</div>
-
-  <h3>Valori Falsy e Truthy</h3>
-  <p>Quando un valore viene valutato in un contesto booleano (ad esempio in un <code>if</code>), JavaScript lo considera "vero" o "falso" anche se non è un booleano.</p>
-  <div class="example"><strong>Falsy:</strong> <code>false</code>, <code>0</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code><br><strong>Truthy:</strong> tutti gli altri valori (inclusi <code>[]</code> e <code>{}</code>)</div>
-
-  <h3>Input e Output</h3>
-  <ul>
-    <li><code>console.log()</code> → stampa dati sulla console;</li>
-    <li><code>prompt()</code> → chiede un valore all'utente e restituisce una <em>stringa</em>.</li>
-  </ul>
-  <div class="tip"><strong>TRUCCO:</strong> Poiché <code>prompt()</code> restituisce sempre una stringa, se hai bisogno di un numero convertilo con <code>Number()</code> o <code>parseInt()</code>.
-    <div class="example"><pre>let eta = Number(prompt("Inserisci la tua età:"));
-console.log(`Hai ${eta} anni.`);</pre></div>
-  </div>
-
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li>Usa <code>let</code> e <code>const</code> per dichiarare variabili moderne.</li>
-      <li>I tipi primitivi sono Number, String, Boolean, Undefined e Null.</li>
-      <li>Fai attenzione alle conversioni automatiche di tipo.</li>
-      <li>Preferisci sempre <code>===</code> per confronti sicuri.</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ====================== LEZIONE 3 ====================== -->
-<div class="lesson" id="lezione3">
-  <h2>Lezione 3: Operatori e Controllo del Flusso</h2>
-  <h3>Operatori Aritmetici</h3>
-  <p>Gli <strong>operatori aritmetici</strong> vengono utilizzati per eseguire operazioni matematiche di base. Ogni operazione restituisce un valore numerico.</p>
-  <div class="table-container">
-    <table>
-      <thead><tr><th>Operatore</th><th>Descrizione</th><th>Esempio</th><th>Risultato</th></tr></thead>
-      <tbody>
-        <tr><td><code>+</code></td><td>Somma / Concatenazione</td><td><code>5 + 3</code></td><td>8</td></tr>
-        <tr><td><code>-</code></td><td>Sottrazione</td><td><code>9 - 4</code></td><td>5</td></tr>
-        <tr><td><code>*</code></td><td>Moltiplicazione</td><td><code>3 * 2</code></td><td>6</td></tr>
-        <tr><td><code>/</code></td><td>Divisione</td><td><code>10 / 4</code></td><td>2.5</td></tr>
-        <tr><td><code>%</code></td><td>Resto (modulo)</td><td><code>7 % 3</code></td><td>1</td></tr>
-        <tr><td><code>**</code></td><td>Potenza</td><td><code>2 ** 3</code></td><td>8</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tip"><strong>TRUCCO:</strong> Puoi usare il modulo (<code>%</code>) per capire se un numero è pari o dispari.
-    <div class="example"><pre>let numero = 7;
-if (numero % 2 === 0) console.log("Pari");
-else console.log("Dispari");</pre></div>
-  </div>
-  <div class="warning"><strong>ATTENZIONE:</strong> L'operatore <code>+</code> serve anche per concatenare stringhe:
-    <div class="example"><pre>console.log("Ciao " + "Andrea"); // "Ciao Andrea"
-console.log("5" + 2); // "52" → converte in stringa!</pre></div>
-  </div>
-
-  <h3>Operatori di Confronto</h3>
-  <p>Gli <strong>operatori di confronto</strong> restituiscono sempre un valore booleano (<code>true</code> o <code>false</code>).</p>
-  <div class="table-container">
-    <table>
-      <thead><tr><th>Operatore</th><th>Significato</th><th>Esempio</th><th>Risultato</th></tr></thead>
-      <tbody>
-        <tr><td><code>==</code></td><td>Uguale (con coercizione)</td><td><code>"5" == 5</code></td><td class="true-cell">true</td></tr>
-        <tr><td><code>===</code></td><td>Uguale (tipo e valore)</td><td><code>"5" === 5</code></td><td class="false-cell">false</td></tr>
-        <tr><td><code>!=</code></td><td>Diverso (con coercizione)</td><td><code>"5" != 5</code></td><td class="false-cell">false</td></tr>
-        <tr><td><code>!==</code></td><td>Diverso (tipo e valore)</td><td><code>"5" !== 5</code></td><td class="true-cell">true</td></tr>
-        <tr><td><code>&gt;</code></td><td>Maggiore di</td><td><code>8 &gt; 6</code></td><td class="true-cell">true</td></tr>
-        <tr><td><code>&lt;</code></td><td>Minore di</td><td><code>8 &lt; 6</code></td><td class="false-cell">false</td></tr>
-        <tr><td><code>&gt;=</code></td><td>Maggiore o uguale</td><td><code>10 &gt;= 10</code></td><td class="true-cell">true</td></tr>
-        <tr><td><code>&lt;=</code></td><td>Minore o uguale</td><td><code>7 &lt;= 5</code></td><td class="false-cell">false</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="important"><strong>DA RICORDARE:</strong> Usa sempre <code>===</code> e <code>!==</code> per evitare le conversioni implicite del <code>==</code> e <code>!=</code>.</div>
-
-  <h3>Operatori Logici</h3>
-  <p>Gli <strong>operatori logici</strong> servono per combinare più condizioni logiche.</p>
-  <div class="table-container">
-    <table>
-      <thead><tr><th>Operatore</th><th>Nome</th><th>Descrizione</th></tr></thead>
-      <tbody>
-        <tr><td><code>&amp;&amp;</code></td><td>AND</td><td>Vero solo se tutte le condizioni sono vere</td></tr>
-        <tr><td><code>||</code></td><td>OR</td><td>Vero se almeno una condizione è vera</td></tr>
-        <tr><td><code>!</code></td><td>NOT</td><td>Inverte il valore logico</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>Tabella di Verità</h3>
-  <div class="table-container">
-    <table class="table-center">
-      <thead><tr><th style="text-align:center">A</th><th style="text-align:center">B</th><th style="text-align:center">A &amp;&amp; B</th><th style="text-align:center">A || B</th><th style="text-align:center">!A</th></tr></thead>
-      <tbody>
-        <tr><td class="true-cell">true</td><td class="true-cell">true</td><td class="true-cell">true</td><td class="true-cell">true</td><td class="false-cell">false</td></tr>
-        <tr><td class="true-cell">true</td><td class="false-cell">false</td><td class="false-cell">false</td><td class="true-cell">true</td><td class="false-cell">false</td></tr>
-        <tr><td class="false-cell">false</td><td class="true-cell">true</td><td class="false-cell">false</td><td class="true-cell">true</td><td class="true-cell">true</td></tr>
-        <tr><td class="false-cell">false</td><td class="false-cell">false</td><td class="false-cell">false</td><td class="false-cell">false</td><td class="true-cell">true</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tip"><strong>TRUCCO:</strong> Gli operatori logici possono essere concatenati:
-    <div class="example"><pre>let eta = 20;
+    <!-- ====================== LEZIONE 3 ====================== -->
+    <div class="lesson" id="lezione3">
+        <h2>🔢 Lezione 3: Operatori e Controllo del Flusso</h2>
+        <h3>Operatori Aritmetici</h3>
+        <p>Gli <strong>operatori aritmetici</strong> vengono utilizzati per eseguire operazioni matematiche di base. Ogni operazione restituisce un valore numerico.</p>
+        <div class="table-container">
+            <table>
+                <caption>Operatori Aritmetici Principali</caption>
+                <thead><tr><th scope="col">Operatore</th><th scope="col">Descrizione</th><th scope="col">Esempio</th><th scope="col">Risultato</th></tr></thead>
+                <tbody>
+                    <tr><td><code>+</code></td><td>Somma / Concatenazione</td><td><code>5 + 3</code></td><td>8</td></tr>
+                    <tr><td><code>-</code></td><td>Sottrazione</td><td><code>9 - 4</code></td><td>5</td></tr>
+                    <tr><td><code>*</code></td><td>Moltiplicazione</td><td><code>3 * 2</code></td><td>6</td></tr>
+                    <tr><td><code>/</code></td><td>Divisione</td><td><code>10 / 4</code></td><td>2.5</td></tr>
+                    <tr><td><code>%</code></td><td>Resto (modulo)</td><td><code>7 % 3</code></td><td>1</td></tr>
+                    <tr><td><code>**</code></td><td>Potenza</td><td><code>2 ** 3</code></td><td>8</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip"><strong>TRUCCO:</strong> Puoi usare il modulo (<code>%</code>) per capire se un numero è pari o dispari. <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let numero = 7;
+if (numero % 2 === 0)
+    console.log("Pari");
+else
+    console.log("Dispari");
+</pre></div> </div>
+        <div class="warning"><strong>ATTENZIONE:</strong> L'operatore <code>+</code> serve anche per concatenare stringhe: <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>console.log("Ciao " + "Andrea"); // "Ciao Andrea"
+console.log("5" + 2); // "52" → converte in stringa!
+</pre></div> </div>
+        <h3>Operatori di Confronto</h3>
+        <p>Gli <strong>operatori di confronto</strong> restituiscono sempre un valore booleano (<code>true</code> o <code>false</code>).</p>
+        <div class="table-container">
+            <table>
+                <caption>Operatori di Confronto</caption>
+                <thead><tr><th scope="col">Operatore</th><th scope="col">Significato</th><th scope="col">Esempio</th><th scope="col">Risultato</th></tr></thead>
+                <tbody>
+                    <tr><td><code>==</code></td><td>Uguale (con coercizione)</td><td><code>"5" == 5</code></td><td class="true-cell">true</td></tr>
+                    <tr><td><code>===</code></td><td>Uguale (tipo e valore)</td><td><code>"5" === 5</code></td><td class="false-cell">false</td></tr>
+                    <tr><td><code>!=</code></td><td>Diverso (con coercizione)</td><td><code>"5" != 5</code></td><td class="false-cell">false</td></tr>
+                    <tr><td><code>!==</code></td><td>Diverso (tipo e valore)</td><td><code>"5" !== 5</code></td><td class="true-cell">true</td></tr>
+                    <tr><td><code>&gt;</code></td><td>Maggiore di</td><td><code>8 &gt; 6</code></td><td class="true-cell">true</td></tr>
+                    <tr><td><code>&lt;</code></td><td>Minore di</td><td><code>8 &lt; 6</code></td><td class="false-cell">false</td></tr>
+                    <tr><td><code>&gt;=</code></td><td>Maggiore o uguale</td><td><code>10 &gt;= 10</code></td><td class="true-cell">true</td></tr>
+                    <tr><td><code>&lt;=</code></td><td>Minore o uguale</td><td><code>7 &lt;= 5</code></td><td class="false-cell">false</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="important"><strong>DA RICORDARE:</strong> Usa sempre <code>===</code> e <code>!==</code> per evitare le conversioni implicite del <code>==</code> e <code>!=</code>.</div>
+        <h3>Operatori Logici</h3>
+        <p>Gli <strong>operatori logici</strong> servono per combinare più condizioni logiche.</p>
+        <div class="table-container">
+            <table>
+                <caption>Operatori Logici</caption>
+                <thead><tr><th scope="col">Operatore</th><th scope="col">Nome</th><th scope="col">Descrizione</th></tr></thead>
+                <tbody>
+                    <tr><td><code>&amp;&amp;</code></td><td>AND</td><td>Vero solo se tutte le condizioni sono vere</td></tr>
+                    <tr><td><code>||</code></td><td>OR</td><td>Vero se almeno una condizione è vera</td></tr>
+                    <tr><td><code>!</code></td><td>NOT</td><td>Inverte il valore logico</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>Tabella di Verità</h3>
+        <div class="table-container">
+            <table class="table-center">
+                <caption>Tabella di Verità per Operatori Logici</caption>
+                <thead><tr><th scope="col" style="text-align:center">A</th><th scope="col" style="text-align:center">B</th><th scope="col" style="text-align:center">A &amp;&amp; B</th><th scope="col" style="text-align:center">A || B</th><th scope="col" style="text-align:center">!A</th></tr></thead>
+                <tbody>
+                    <tr><td class="true-cell">true</td><td class="true-cell">true</td><td class="true-cell">true</td><td class="true-cell">true</td><td class="false-cell">false</td></tr>
+                    <tr><td class="true-cell">true</td><td class="false-cell">false</td><td class="false-cell">false</td><td class="true-cell">true</td><td class="false-cell">false</td></tr>
+                    <tr><td class="false-cell">false</td><td class="true-cell">true</td><td class="false-cell">false</td><td class="true-cell">true</td><td class="true-cell">true</td></tr>
+                    <tr><td class="false-cell">false</td><td class="false-cell">false</td><td class="false-cell">false</td><td class="false-cell">false</td><td class="true-cell">true</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip"><strong>TRUCCO:</strong> Gli operatori logici possono essere concatenati: <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let eta = 20;
 let patente = true;
 if (eta >= 18 && patente === true) {
-  console.log("Puoi guidare!");
+    console.log("Puoi guidare!");
 } else {
-  console.log("Non puoi guidare.");
-}</pre></div>
-  </div>
-
-  <h3>Controllo del Flusso: if / else / else if</h3>
-  <p>Le istruzioni condizionali determinano quale blocco di codice eseguire in base al risultato di una condizione.</p>
-  <div class="example"><pre>let eta = 17;
+    console.log("Non puoi guidare.");
+}
+</pre></div> </div>
+        <h3>Controllo del Flusso: if / else / else if</h3>
+        <p>Le istruzioni condizionali determinano quale blocco di codice eseguire in base al risultato di una condizione.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let eta = 17;
 if (eta >= 18) {
-  console.log("Sei maggiorenne");
+    console.log("Sei maggiorenne");
 } else {
-  console.log("Sei minorenne");
+    console.log("Sei minorenne");
 }</pre></div>
-
-  <h3>Struttura Completa con else if</h3>
-  <div class="example"><pre>let eta = 70;
+        <h3>Struttura Completa con else if</h3>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let eta = 70;
 if (eta < 18) {
-  console.log("Minorenne");
+    console.log("Minorenne");
 } else if (eta <= 65) {
-  console.log("Adulto");
+    console.log("Adulto");
 } else {
-  console.log("Pensionato");
+    console.log("Pensionato");
 }</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> L'ordine delle condizioni è importante: vengono valutate dall'alto verso il basso.</div>
-
-  <h3>Operatore Ternario</h3>
-  <p>È una forma compatta di <code>if...else</code>, utile per assegnazioni rapide.</p>
-  <div class="example"><pre>let messaggio = (eta >= 18) ? "Accesso consentito" : "Accesso negato";
+        <div class="tip"><strong>TRUCCO:</strong> L'ordine delle condizioni è importante: vengono valutate dall'alto verso il basso.</div>
+        <h3>Operatore Ternario</h3>
+        <p>È una forma compatta di <code>if...else</code>, utile per assegnazioni rapide.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let messaggio = (eta >= 18) ? "Accesso consentito" : "Accesso negato";
 console.log(messaggio);</pre></div>
-
-  <h3>switch</h3>
-  <p>L'istruzione <code>switch</code> confronta un valore con diversi casi possibili. È utile quando ci sono molte alternative.</p>
-  <div class="example"><pre>let giorno = "Lunedì";
+        <h3>switch</h3>
+        <p>L'istruzione <code>switch</code> confronta un valore con diversi casi possibili. È utile quando ci sono molte alternative.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let giorno = "Lunedì";
 switch (giorno) {
-  case "Lunedì":
-    console.log("Inizio settimana");
-    break;
-  case "Venerdì":
-    console.log("Quasi weekend!");
-    break;
-  default:
-    console.log("Giornata normale");
+    case "Lunedì":
+        console.log("Inizio settimana");
+        break;
+    case "Venerdì":
+        console.log("Quasi weekend!");
+        break;
+    default:
+        console.log("Giornata normale");
 }</pre></div>
-  <div class="important"><strong>NOTA BENE:</strong> Ricorda sempre di usare <code>break</code> alla fine di ogni <code>case</code> per evitare il "fall-through".</div>
-
-  <h3>Cicli (for / while / do...while)</h3>
-  <p>I cicli permettono di ripetere un blocco di codice più volte.</p>
-  <div class="example"><pre>// Ciclo for
+        <div class="important"><strong>NOTA BENE:</strong> Ricorda sempre di usare <code>break</code> alla fine di ogni <code>case</code> per evitare il "fall-through".</div>
+        <h3>Cicli (for / while / do...while)</h3>
+        <p>I cicli permettono di ripetere un blocco di codice più volte.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Ciclo for
 for (let i = 1; i <= 5; i++) {
-  console.log(i);
+    console.log(i);
 }
 // Ciclo while
 let j = 1;
 while (j <= 5) {
-  console.log(j);
-  j++;
+    console.log(j);
+    j++;
 }</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Usa <code>for</code> quando conosci il numero di iterazioni, <code>while</code> quando non lo conosci, e <code>do...while</code> se vuoi che il blocco venga eseguito almeno una volta.</div>
+        <div class="tip"><strong>TRUCCO:</strong> Usa <code>for</code> quando conosci il numero di iterazioni, <code>while</code> quando non lo conosci, e <code>do...while</code> se vuoi che il blocco venga eseguito almeno una volta.</div>
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li>Gli operatori aritmetici lavorano anche con stringhe (attenzione al +).</li>
+                <li>Usa <code>===</code> e <code>!==</code> per confronti sicuri.</li>
+                <li>Nei cicli, ricordati sempre di aggiornare la variabile di controllo per evitare loop infiniti.</li>
+            </ul>
+        </div>
+        <!-- Quiz Rapido -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Operatore per uguaglianza stretta?</h4>
+            <p>Quale operatore evita la coercizione di tipo?</p>
+            <input type="radio" name="q3" value="a"> a) ==<br>
+            <input type="radio" name="q3" value="b"> b) ===<br>
+            <input type="radio" name="q3" value="c"> c) =<br>
+            <button onclick="checkQuiz('q3', 'b', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+    </div>
 
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li>Gli operatori aritmetici lavorano anche con stringhe (attenzione al +).</li>
-      <li>Usa <code>===</code> e <code>!==</code> per confronti sicuri.</li>
-      <li>Nei cicli, ricordati sempre di aggiornare la variabile di controllo per evitare loop infiniti.</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ====================== LEZIONE 4 ====================== -->
-<div class="lesson" id="lezione4">
-  <h2>Lezione 4: Strutture Dati - Array e Oggetti</h2>
-  <h3>Introduzione alle Strutture Dati</h3>
-  <p>Le <strong>strutture dati</strong> servono per organizzare e gestire insiemi di informazioni. In JavaScript, le più comuni sono:</p>
-  <ul>
-    <li><strong>Array</strong> → liste ordinate di valori (indicizzate da numeri interi a partire da 0);</li>
-    <li><strong>Oggetti</strong> → insiemi non ordinati di coppie chiave-valore.</li>
-  </ul>
-  <div class="tip"><strong>TRUCCO:</strong> Usa un <code>array</code> quando l'ordine degli elementi è importante, e un <code>oggetto</code> quando devi associare un nome a ciascun valore.</div>
-
-  <h3>Array (Liste)</h3>
-  <p>Un <strong>array</strong> si dichiara con le parentesi quadre <code>[]</code>. Gli elementi sono separati da virgole e si accede a ciascuno tramite un indice numerico.</p>
-  <div class="example"><pre>let voti = [30, 28, 25];
+    <!-- ====================== LEZIONE 4 ====================== -->
+    <div class="lesson" id="lezione4">
+        <h2>📊 Lezione 4: Strutture Dati - Array e Oggetti</h2>
+        <h3>Introduzione alle Strutture Dati</h3>
+        <p>Le <strong>strutture dati</strong> servono per organizzare e gestire insiemi di informazioni. In JavaScript, le più comuni sono:</p>
+        <ul>
+            <li><strong>Array</strong> → liste ordinate di valori (indicizzate da numeri interi a partire da 0);</li>
+            <li><strong>Oggetti</strong> → insiemi non ordinati di coppie chiave-valore.</li>
+        </ul>
+        <div class="tip"><strong>TRUCCO:</strong> Usa un <code>array</code> quando l'ordine degli elementi è importante, e un <code>oggetto</code> quando devi associare un nome a ciascun valore.</div>
+        <h3>Array (Liste)</h3>
+        <p>Un <strong>array</strong> si dichiara con le parentesi quadre <code>[]</code>. Gli elementi sono separati da virgole e si accede a ciascuno tramite un indice numerico.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let voti = [30, 28, 25];
 console.log(voti[0]); // 30 (primo elemento)
 console.log(voti.length); // 3 (numero di elementi)</pre></div>
-
-  <h4>Metodi Utili degli Array</h4>
-  <div class="table-container">
-    <table>
-      <thead><tr><th>Metodo</th><th>Descrizione</th><th>Esempio</th></tr></thead>
-      <tbody>
-        <tr><td><code>push()</code></td><td>Aggiunge un elemento alla fine</td><td><code>voti.push(27)</code></td></tr>
-        <tr><td><code>pop()</code></td><td>Rimuove l'ultimo elemento</td><td><code>voti.pop()</code></td></tr>
-        <tr><td><code>shift()</code></td><td>Rimuove il primo elemento</td><td><code>voti.shift()</code></td></tr>
-        <tr><td><code>unshift()</code></td><td>Aggiunge un elemento all'inizio</td><td><code>voti.unshift(32)</code></td></tr>
-        <tr><td><code>sort()</code></td><td>Ordina gli elementi (attenzione: in ordine alfabetico per default)</td><td><code>voti.sort()</code></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="warning"><strong>ATTENZIONE:</strong> <code>sort()</code> converte gli elementi in stringhe. Per ordinare numeri in modo corretto usa una funzione di confronto:
-    <div class="example"><pre>voti.sort((a, b) => a - b); // ordinamento crescente</pre></div>
-  </div>
-
-  <h4>Iterare su un Array</h4>
-  <p>Puoi scorrere tutti gli elementi di un array con diversi tipi di ciclo:</p>
-  <div class="example"><pre>// Metodo classico
+        <h4>Metodi Utili degli Array</h4>
+        <div class="table-container">
+            <table>
+                <caption>Metodi Utili degli Array</caption>
+                <thead><tr><th scope="col">Metodo</th><th scope="col">Descrizione</th><th scope="col">Esempio</th></tr></thead>
+                <tbody>
+                    <tr><td><code>push()</code></td><td>Aggiunge un elemento alla fine</td><td><code>voti.push(27)</code></td></tr>
+                    <tr><td><code>pop()</code></td><td>Rimuove l'ultimo elemento</td><td><code>voti.pop()</code></td></tr>
+                    <tr><td><code>shift()</code></td><td>Rimuove il primo elemento</td><td><code>voti.shift()</code></td></tr>
+                    <tr><td><code>unshift()</code></td><td>Aggiunge un elemento all'inizio</td><td><code>voti.unshift(32)</code></td></tr>
+                    <tr><td><code>sort()</code></td><td>Ordina gli elementi (attenzione: in ordine alfabetico per default)</td><td><code>voti.sort()</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="warning"><strong>ATTENZIONE:</strong> <code>sort()</code> converte gli elementi in stringhe. Per ordinare numeri in modo corretto usa una funzione di confronto: <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>voti.sort((a, b) => a - b); // ordinamento crescente</pre></div> </div>
+        <h4>Iterare su un Array</h4>
+        <p>Puoi scorrere tutti gli elementi di un array con diversi tipi di ciclo:</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Metodo classico
 for (let i = 0; i < voti.length; i++) {
-  console.log(voti[i]);
+    console.log(voti[i]);
 }
 // Metodo moderno (for...of)
 for (let voto of voti) {
-  console.log(voto);
+    console.log(voto);
 }</pre></div>
-  <div class="important"><strong>DA RICORDARE:</strong> Non usare <code>for...in</code> con gli array: restituisce gli indici come stringhe, non i valori.</div>
-
-  <h3>Oggetti (Dizionari)</h3>
-  <p>Un <strong>oggetto</strong> è una collezione di coppie <em>chiave → valore</em>. Le chiavi sono solitamente stringhe, e ogni valore può essere di qualunque tipo.</p>
-  <div class="example"><pre>let studente = {
-  nome: "Andrea",
-  corso: "Laboratorio I",
-  voto: 30
+        <div class="important"><strong>DA RICORDARE:</strong> Non usare <code>for...in</code> con gli array: restituisce gli indici come stringhe, non i valori.</div>
+        <h3>Oggetti (Dizionari)</h3>
+        <p>Un <strong>oggetto</strong> è una collezione di coppie <em>chiave → valore</em>. Le chiavi sono solitamente stringhe, e ogni valore può essere di qualunque tipo.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let studente = {
+    nome: "Andrea",
+    corso: "Laboratorio I",
+    voto: 30
 };
-console.log(studente.nome);      // "Andrea"
-console.log(studente["corso"]);  // "Laboratorio I"</pre></div>
-
-  <h4>Dot Notation vs Bracket Notation</h4>
-  <div class="table-container">
-    <table>
-      <thead><tr><th>Forma</th><th>Esempio</th><th>Quando usarla</th></tr></thead>
-      <tbody>
-        <tr><td>Dot Notation</td><td><code>studente.nome</code></td><td>Chiave semplice, conosciuta in anticipo</td></tr>
-        <tr><td>Bracket Notation</td><td><code>studente["voto finale"]</code></td><td>Chiave con spazi o memorizzata in variabile</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tip"><strong>TRUCCO:</strong> Le chiavi possono essere aggiunte o rimosse dinamicamente:
-    <div class="example"><pre>studente.matricola = 12345; // aggiunge nuova chiave
-delete studente.voto;       // rimuove chiave esistente</pre></div>
-  </div>
-
-  <h4>Iterare su un Oggetto</h4>
-  <div class="example"><pre>for (let chiave in studente) {
-  console.log(chiave + ":", studente[chiave]);
+console.log(studente.nome); // "Andrea"
+console.log(studente["corso"]); // "Laboratorio I"</pre></div>
+        <h4>Dot Notation vs Bracket Notation</h4>
+        <div class="table-container">
+            <table>
+                <caption>Dot vs Bracket Notation</caption>
+                <thead><tr><th scope="col">Forma</th><th scope="col">Esempio</th><th scope="col">Quando usarla</th></tr></thead>
+                <tbody>
+                    <tr><td>Dot Notation</td><td><code>studente.nome</code></td><td>Chiave semplice, conosciuta in anticipo</td></tr>
+                    <tr><td>Bracket Notation</td><td><code>studente["voto finale"]</code></td><td>Chiave con spazi o memorizzata in variabile</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip"><strong>TRUCCO:</strong> Le chiavi possono essere aggiunte o rimosse dinamicamente: <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>studente.matricola = 12345; // aggiunge nuova chiave
+delete studente.voto; // rimuove chiave esistente</pre></div> </div>
+        <h4>Iterare su un Oggetto</h4>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>for (let chiave in studente) {
+    console.log(chiave + ":", studente[chiave]);
 }</pre></div>
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li>Gli array sono ordinati, gli oggetti no.</li>
+                <li>Usa <code>for...of</code> per array e <code>for...in</code> per oggetti.</li>
+                <li><code>delete</code> rimuove una proprietà, ma può rallentare gli oggetti grandi (usa con parsimonia).</li>
+                <li>In JavaScript tutto, anche gli array e le funzioni, è in realtà un oggetto.</li>
+            </ul>
+        </div>
+        <!-- Quiz Rapido -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Come accedi al primo elemento di un array?</h4>
+            <p>Per un array `voti = [30, 28]`, il primo elemento è:</p>
+            <input type="radio" name="q4" value="a"> a) voti[1]<br>
+            <input type="radio" name="q4" value="b"> b) voti[0]<br>
+            <input type="radio" name="q4" value="c"> c) voti.length<br>
+            <button onclick="checkQuiz('q4', 'b', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+    </div>
 
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li>Gli array sono ordinati, gli oggetti no.</li>
-      <li>Usa <code>for...of</code> per array e <code>for...in</code> per oggetti.</li>
-      <li><code>delete</code> rimuove una proprietà, ma può rallentare gli oggetti grandi (usa con parsimonia).</li>
-      <li>In JavaScript tutto, anche gli array e le funzioni, è in realtà un oggetto.</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ====================== LEZIONE 5 ====================== -->
-<div class="lesson" id="lezione5">
-  <h2>Lezione 5: Funzioni e Scope</h2>
-  <h3>Introduzione alle Funzioni</h3>
-  <p>Le <strong>funzioni</strong> sono blocchi di codice riutilizzabili che svolgono un compito specifico. Permettono di evitare ripetizioni e rendono il codice più ordinato, leggibile e modulare.</p>
-  <div class="example"><pre>function saluta() {
-  console.log("Ciao, benvenuto nel corso di Laboratorio I!");
+    <!-- ====================== LEZIONE 5 ====================== -->
+    <div class="lesson" id="lezione5">
+        <h2>⚙️ Lezione 5: Funzioni e Scope</h2>
+        <h3>Introduzione alle Funzioni</h3>
+        <p>Le <strong>funzioni</strong> sono blocchi di codice riutilizzabili che svolgono un compito specifico. Permettono di evitare ripetizioni e rendono il codice più ordinato, leggibile e modulare.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>function saluta() {
+    console.log("Ciao, benvenuto nel corso di Laboratorio I!");
 }
 // Chiamata della funzione
 saluta(); // Output: "Ciao, benvenuto nel corso di Laboratorio I!"</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Il nome di una funzione deve essere chiaro e descrittivo: preferisci <code>calcolaTotale()</code> piuttosto che <code>fun1()</code>.</div>
-
-  <h3>Funzioni con Parametri</h3>
-  <p>Le funzioni possono ricevere <strong>parametri</strong> (valori in ingresso) e restituire un risultato con la parola chiave <code>return</code>.</p>
-  <div class="example"><pre>function somma(a, b) {
-  return a + b;
+        <div class="tip"><strong>TRUCCO:</strong> Il nome di una funzione deve essere chiaro e descrittivo: preferisci <code>calcolaTotale()</code> piuttosto che <code>fun1()</code>.</div>
+        <h3>Funzioni con Parametri</h3>
+        <p>Le funzioni possono ricevere <strong>parametri</strong> (valori in ingresso) e restituire un risultato con la parola chiave <code>return</code>.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>function somma(a, b) {
+    return a + b;
 }
 let risultato = somma(5, 3);
 console.log(risultato); // 8</pre></div>
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li>Una funzione può avere nessun parametro, uno o più parametri.</li>
-      <li>Se manca <code>return</code>, la funzione restituisce automaticamente <code>undefined</code>.</li>
-    </ul>
-  </div>
-
-  <h3>Arrow Functions (Funzioni Freccia)</h3>
-  <p>Le <strong>Arrow Functions</strong> sono una sintassi più moderna e compatta introdotta con ES6.</p>
-  <div class="example"><pre>// Funzione classica
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li>Una funzione può avere nessun parametro, uno o più parametri.</li>
+                <li>Se manca <code>return</code>, la funzione restituisce automaticamente <code>undefined</code>.</li>
+            </ul>
+        </div>
+        <h3>Arrow Functions (Funzioni Freccia)</h3>
+        <p>Le <strong>Arrow Functions</strong> sono una sintassi più moderna e compatta introdotta con ES6.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Funzione classica
 function moltiplica(a, b) {
-  return a * b;
+    return a * b;
 }
 // Arrow function equivalente
 const moltiplica = (a, b) => a * b;
 console.log(moltiplica(2, 3)); // 6</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Se l'arrow function ha un solo parametro, puoi omettere le parentesi:
-    <pre>const raddoppia = x => x * 2;</pre>
-  </div>
-
-  <h3>Scope delle Variabili</h3>
-  <p>Lo <strong>scope</strong> (ambito) definisce dove una variabile è visibile e utilizzabile. In JavaScript, esistono tre tipi di scope:</p>
-  <div class="table-container">
-    <table>
-      <thead><tr><th>Tipo di Scope</th><th>Descrizione</th><th>Esempio</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Globale</strong></td><td>La variabile è accessibile ovunque nel programma</td><td><code>let x = 10;</code></td></tr>
-        <tr><td><strong>Di Funzione</strong></td><td>Visibile solo all'interno della funzione in cui è dichiarata (valido per <code>var</code>)</td><td><code>function test() { var y = 5; }</code></td></tr>
-        <tr><td><strong>Di Blocco</strong></td><td>Visibile solo all'interno del blocco tra parentesi <code>{}</code> (valido per <code>let</code> e <code>const</code>)</td><td><code>if (true) { let z = 3; }</code></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="warning"><strong>ATTENZIONE:</strong> Le variabili dichiarate con <code>var</code> non rispettano lo scope di blocco, e possono generare bug difficili da individuare.</div>
-  <div class="important"><strong>REGOLA MODERNA:</strong> Usa sempre <code>let</code> e <code>const</code> - evita <code>var</code>.</div>
-
-  <h3>Hoisting</h3>
-  <p>In JavaScript, le dichiarazioni di variabili e funzioni vengono "spostate" virtualmente in cima al loro scope: questo comportamento è chiamato <strong>hoisting</strong>.</p>
-  <div class="example"><pre>console.log(a); // undefined
+        <div class="tip"><strong>TRUCCO:</strong> Se l'arrow function ha un solo parametro, puoi omettere le parentesi: <pre><button class="copy-btn" onclick="copyCode(this)">📋</button>const raddoppia = x => x * 2;</pre> </div>
+        <h3>Scope delle Variabili</h3>
+        <p>Lo <strong>scope</strong> (ambito) definisce dove una variabile è visibile e utilizzabile. In JavaScript, esistono tre tipi di scope:</p>
+        <div class="table-container">
+            <table>
+                <caption>Tipi di Scope</caption>
+                <thead><tr><th scope="col">Tipo di Scope</th><th scope="col">Descrizione</th><th scope="col">Esempio</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Globale</strong></td><td>La variabile è accessibile ovunque nel programma</td><td><code>let x = 10;</code></td></tr>
+                    <tr><td><strong>Di Funzione</strong></td><td>Visibile solo all'interno della funzione in cui è dichiarata (valido per <code>var</code>)</td><td><code>function test() { var y = 5; }</code></td></tr>
+                    <tr><td><strong>Di Blocco</strong></td><td>Visibile solo all'interno del blocco tra parentesi <code>{}</code> (valido per <code>let</code> e <code>const</code>)</td><td><code>if (true) { let z = 3; }</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="warning"><strong>ATTENZIONE:</strong> Le variabili dichiarate con <code>var</code> non rispettano lo scope di blocco, e possono generare bug difficili da individuare.</div>
+        <div class="important"><strong>REGOLA MODERNA:</strong> Usa sempre <code>let</code> e <code>const</code> - evita <code>var</code>.</div>
+        <h3>Hoisting</h3>
+        <p>In JavaScript, le dichiarazioni di variabili e funzioni vengono "spostate" virtualmente in cima al loro scope: questo comportamento è chiamato <strong>hoisting</strong>.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>console.log(a); // undefined
 var a = 5;
 console.log(b); // ReferenceError
 let b = 10;</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Solo le dichiarazioni (non le inizializzazioni) vengono "sollevate". Con <code>let</code> e <code>const</code> il codice è più prevedibile.</div>
-
-  <h3>Funzioni Annidate e Scope Chain</h3>
-  <p>Le funzioni possono essere <strong>annidate</strong> (cioè dichiarate dentro altre funzioni). La funzione interna può accedere alle variabili della funzione esterna, ma non viceversa.</p>
-  <div class="example"><pre>function esterna() {
-  let messaggio = "Ciao dal livello esterno";
-  function interna() {
-    console.log(messaggio);
-  }
-  interna(); // Accesso consentito
+        <div class="tip"><strong>TRUCCO:</strong> Solo le dichiarazioni (non le inizializzazioni) vengono "sollevate". Con <code>let</code> e <code>const</code> il codice è più prevedibile.</div>
+        <h3>Funzioni Annidate e Scope Chain</h3>
+        <p>Le funzioni possono essere <strong>annidate</strong> (cioè dichiarate dentro altre funzioni). La funzione interna può accedere alle variabili della funzione esterna, ma non viceversa.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>function esterna() {
+    let messaggio = "Ciao dal livello esterno";
+    function interna() {
+        console.log(messaggio);
+    }
+    interna(); // Accesso consentito
 }
 esterna();</pre></div>
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li>Le funzioni interne "vedono" le variabili esterne (scope chain).</li>
-      <li>Le variabili interne NON sono accessibili dall'esterno.</li>
-    </ul>
-  </div>
-
-  <h3>Closures (Chiusure)</h3>
-  <p>Una <strong>closure</strong> si crea quando una funzione "interna" mantiene l'accesso alle variabili della funzione "esterna" anche dopo che quest'ultima è terminata.</p>
-  <div class="example"><pre>function creaContatore() {
-  let count = 0;
-  return function() {
-    count++;
-    return count;
-  };
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li>Le funzioni interne "vedono" le variabili esterne (scope chain).</li>
+                <li>Le variabili interne NON sono accessibili dall'esterno.</li>
+            </ul>
+        </div>
+        <h3>Closures (Chiusure)</h3>
+        <p>Una <strong>closure</strong> si crea quando una funzione "interna" mantiene l'accesso alle variabili della funzione "esterna" anche dopo che quest'ultima è terminata.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>function creaContatore() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
 }
 let contatore = creaContatore();
 console.log(contatore()); // 1
 console.log(contatore()); // 2</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Le closure sono alla base di concetti come "funzioni private" e "moduli" in JavaScript moderno.</div>
+        <div class="tip"><strong>TRUCCO:</strong> Le closure sono alla base di concetti come "funzioni private" e "moduli" in JavaScript moderno.</div>
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li>Le funzioni possono essere trattate come valori (assegnate a variabili, passate come parametri, restituite).</li>
+                <li>Lo scope definisce dove le variabili sono accessibili.</li>
+                <li>L'hoisting "solleva" le dichiarazioni, ma non le inizializzazioni.</li>
+                <li>Le closure permettono alle funzioni di ricordare il contesto in cui sono state create.</li>
+            </ul>
+        </div>
+        <!-- Quiz Rapido -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Cos'è una closure?</h4>
+            <p>Una funzione che mantiene accesso a variabili esterne anche dopo la fine della funzione esterna è:</p>
+            <input type="radio" name="q5" value="a"> a) Hoisting<br>
+            <input type="radio" name="q5" value="b"> b) Closure<br>
+            <input type="radio" name="q5" value="c"> c) Scope globale<br>
+            <button onclick="checkQuiz('q5', 'b', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+    </div>
 
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li>Le funzioni possono essere trattate come valori (assegnate a variabili, passate come parametri, restituite).</li>
-      <li>Lo scope definisce dove le variabili sono accessibili.</li>
-      <li>L'hoisting "solleva" le dichiarazioni, ma non le inizializzazioni.</li>
-      <li>Le closure permettono alle funzioni di ricordare il contesto in cui sono state create.</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ====================== LEZIONE 6 ====================== -->
-<div class="lesson" id="lezione6">
-  <h2>Lezione 6: Metodi Avanzati per Array e Funzioni di Ordine Superiore</h2>
-  <h3>Introduzione</h3>
-  <p>Gli <strong>Array</strong> in JavaScript non sono solo semplici liste, ma oggetti ricchi di metodi che permettono di trasformare, ordinare, filtrare e combinare i dati in modo molto flessibile. Inoltre, JavaScript consente di trattare le <strong>funzioni come valori</strong>, rendendo possibile la cosiddetta <em>programmazione funzionale</em>.</p>
-  <div class="important"><strong>CONCETTO CHIAVE:</strong> Le <em>funzioni di ordine superiore</em> sono quelle che:
-    <ul>
-      <li>accettano altre funzioni come parametri, oppure</li>
-      <li>restituiscono una funzione come risultato.</li>
-    </ul>
-  </div>
-
-  <h3>Il Metodo <code>forEach()</code></h3>
-  <p>Il metodo <code>forEach()</code> esegue una funzione su ogni elemento dell'array. Non restituisce un nuovo array, ma serve per eseguire operazioni o effetti collaterali.</p>
-  <div class="example"><pre>let numeri = [10, 20, 30];
+    <!-- ====================== LEZIONE 6 ====================== -->
+    <div class="lesson" id="lezione6">
+        <h2>🔄 Lezione 6: Metodi Avanzati per Array e Funzioni di Ordine Superiore</h2>
+        <h3>Introduzione</h3>
+        <p>Gli <strong>Array</strong> in JavaScript non sono solo semplici liste, ma oggetti ricchi di metodi che permettono di trasformare, ordinare, filtrare e combinare i dati in modo molto flessibile. Inoltre, JavaScript consente di trattare le <strong>funzioni come valori</strong>, rendendo possibile la cosiddetta <em>programmazione funzionale</em>.</p>
+        <div class="important"><strong>CONCETTO CHIAVE:</strong> Le <em>funzioni di ordine superiore</em> sono quelle che: <ul>
+                <li>accettano altre funzioni come parametri, oppure</li>
+                <li>restituiscono una funzione come risultato.</li>
+            </ul> </div>
+        <h3>Il Metodo <code>forEach()</code></h3>
+        <p>Il metodo <code>forEach()</code> esegue una funzione su ogni elemento dell'array. Non restituisce un nuovo array, ma serve per eseguire operazioni o effetti collaterali.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let numeri = [10, 20, 30];
 numeri.forEach(function(n) {
-  console.log("Numero:", n);
+    console.log("Numero:", n);
 });
 // Versione arrow
 numeri.forEach(n => console.log("Numero:", n));</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Usa <code>forEach()</code> per scorrere un array, non per calcolare nuovi risultati. Per trasformare i dati, esistono metodi più adatti come <code>map()</code>.</div>
-
-  <h3>Il Metodo <code>map()</code></h3>
-  <p><code>map()</code> crea un <strong>nuovo array</strong> applicando una funzione a ogni elemento dell'array originale. Non modifica l'array di partenza.</p>
-  <div class="example"><pre>let numeri = [1, 2, 3, 4];
+        <div class="tip"><strong>TRUCCO:</strong> Usa <code>forEach()</code> per scorrere un array, non per calcolare nuovi risultati. Per trasformare i dati, esistono metodi più adatti come <code>map()</code>.</div>
+        <h3>Il Metodo <code>map()</code></h3>
+        <p><code>map()</code> crea un <strong>nuovo array</strong> applicando una funzione a ogni elemento dell'array originale. Non modifica l'array di partenza.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let numeri = [1, 2, 3, 4];
 let doppi = numeri.map(x => x * 2);
 console.log(doppi); // [2, 4, 6, 8]</pre></div>
-  <div class="important"><strong>DA RICORDARE:</strong> <code>map()</code> → trasforma ogni elemento in un nuovo valore, <code>forEach()</code> → esegue un'azione senza creare nuovi array.</div>
-
-  <h3>Il Metodo <code>filter()</code></h3>
-  <p><code>filter()</code> restituisce un nuovo array contenente solo gli elementi che soddisfano una condizione.</p>
-  <div class="example"><pre>let voti = [30, 22, 18, 28];
+        <div class="important"><strong>DA RICORDARE:</strong> <code>map()</code> → trasforma ogni elemento in un nuovo valore, <code>forEach()</code> → esegue un'azione senza creare nuovi array.</div>
+        <h3>Il Metodo <code>filter()</code></h3>
+        <p><code>filter()</code> restituisce un nuovo array contenente solo gli elementi che soddisfano una condizione.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let voti = [30, 22, 18, 28];
 let promossi = voti.filter(v => v >= 24);
 console.log(promossi); // [30, 28]</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Usa <code>filter()</code> per estrarre elementi in base a un criterio logico, ad esempio tutti i numeri pari o tutti gli studenti con media superiore a 25.</div>
-
-  <h3>Il Metodo <code>find()</code> e <code>findIndex()</code></h3>
-  <p>Questi metodi servono per <strong>trovare</strong> il primo elemento (o l'indice) che soddisfa una condizione.</p>
-  <div class="example"><pre>let studenti = ["Luca", "Anna", "Andrea", "Marco"];
+        <div class="tip"><strong>TRUCCO:</strong> Usa <code>filter()</code> per estrarre elementi in base a un criterio logico, ad esempio tutti i numeri pari o tutti gli studenti con media superiore a 25.</div>
+        <h3>Il Metodo <code>find()</code> e <code>findIndex()</code></h3>
+        <p>Questi metodi servono per <strong>trovare</strong> il primo elemento (o l'indice) che soddisfa una condizione.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let studenti = ["Luca", "Anna", "Andrea", "Marco"];
 let trovato = studenti.find(nome => nome.startsWith("A"));
 console.log(trovato); // "Anna"
 let posizione = studenti.findIndex(nome => nome === "Andrea");
 console.log(posizione); // 2</pre></div>
-
-  <h3>Il Metodo <code>sort()</code></h3>
-  <p><code>sort()</code> ordina gli elementi dell'array. Attenzione: ordina <em>alfabeticamente</em> per default e modifica l'array originale.</p>
-  <div class="example"><pre>let numeri = [4, 10, 2, 8];
+        <h3>Il Metodo <code>sort()</code></h3>
+        <p><code>sort()</code> ordina gli elementi dell'array. Attenzione: ordina <em>alfabeticamente</em> per default e modifica l'array originale.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let numeri = [4, 10, 2, 8];
 numeri.sort();
 console.log(numeri); // [10, 2, 4, 8] (ordine alfabetico!)
 numeri.sort((a, b) => a - b);
 console.log(numeri); // [2, 4, 8, 10]</pre></div>
-  <div class="warning"><strong>ATTENZIONE:</strong> <code>sort()</code> modifica l'array originale e ordina per stringhe se non specificata una funzione di confronto.</div>
-
-  <h3>Il Metodo <code>reduce()</code></h3>
-  <p><code>reduce()</code> combina tutti gli elementi dell'array in un unico valore, applicando una funzione "accumulatrice" da sinistra a destra.</p>
-  <div class="example"><pre>let numeri = [1, 2, 3, 4, 5];
+        <div class="warning"><strong>ATTENZIONE:</strong> <code>sort()</code> modifica l'array originale e ordina per stringhe se non specificata una funzione di confronto.</div>
+        <h3>Il Metodo <code>reduce()</code></h3>
+        <p><code>reduce()</code> combina tutti gli elementi dell'array in un unico valore, applicando una funzione "accumulatrice" da sinistra a destra.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let numeri = [1, 2, 3, 4, 5];
 let somma = numeri.reduce((acc, n) => acc + n, 0);
 console.log(somma); // 15</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> <code>reduce()</code> può essere usato anche per calcolare medie, concatenare stringhe, o costruire nuovi oggetti e array da altri array.</div>
-
-  <h3>Funzioni di Ordine Superiore</h3>
-  <p>Le <strong>funzioni di ordine superiore</strong> sono funzioni che:</p>
-  <ul>
-    <li>ricevono altre funzioni come parametri, oppure</li>
-    <li>restituiscono una nuova funzione come risultato.</li>
-  </ul>
-  <div class="example"><pre>function saluta(nome) {
-  return () => console.log("Ciao, " + nome + "!");
+        <div class="tip"><strong>TRUCCO:</strong> <code>reduce()</code> può essere usato anche per calcolare medie, concatenare stringhe, o costruire nuovi oggetti e array da altri array.</div>
+        <h3>Funzioni di Ordine Superiore</h3>
+        <p>Le <strong>funzioni di ordine superiore</strong> sono funzioni che:</p>
+        <ul>
+            <li>ricevono altre funzioni come parametri, oppure</li>
+            <li>restituiscono una nuova funzione come risultato.</li>
+        </ul>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>function saluta(nome) {
+    return () => console.log("Ciao, " + nome + "!");
 }
 let salutaAndrea = saluta("Andrea");
 salutaAndrea(); // Output: "Ciao, Andrea!"</pre></div>
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li><code>map()</code>, <code>filter()</code>, <code>reduce()</code> e <code>forEach()</code> accettano funzioni come parametri.</li>
+                <li>Le funzioni possono essere trattate come valori e passate ad altre funzioni.</li>
+                <li>Questo concetto è la base della programmazione funzionale in JavaScript.</li>
+            </ul>
+        </div>
+        <h3>Riepilogo Metodi Principali</h3>
+        <div class="table-container">
+            <table>
+                <caption>Riepilogo Metodi Array</caption>
+                <thead><tr><th scope="col">Metodo</th><th scope="col">Scopo</th><th scope="col">Restituisce Nuovo Array?</th></tr></thead>
+                <tbody>
+                    <tr><td><code>forEach()</code></td><td>Esegue una funzione per ogni elemento</td><td class="false-cell">No</td></tr>
+                    <tr><td><code>map()</code></td><td>Trasforma ogni elemento</td><td class="true-cell">Sì</td></tr>
+                    <tr><td><code>filter()</code></td><td>Filtra elementi in base a una condizione</td><td class="true-cell">Sì</td></tr>
+                    <tr><td><code>reduce()</code></td><td>Combina tutti gli elementi in un singolo valore</td><td class="false-cell">No (ritorna un valore)</td></tr>
+                    <tr><td><code>sort()</code></td><td>Ordina gli elementi (modifica l'array originale)</td><td class="false-cell">No</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="important"><strong>CONSIGLIO PER LA PROVA:</strong> Molti esercizi di Laboratorio I riguardano combinazioni di <code>map()</code>, <code>filter()</code> e <code>reduce()</code>. Allenati a riconoscerne la logica e la differenza.</div>
+        <!-- Quiz Rapido -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Quale metodo crea un nuovo array?</h4>
+            <p>Per trasformare ogni elemento senza modificare l'originale:</p>
+            <input type="radio" name="q6" value="a"> a) forEach<br>
+            <input type="radio" name="q6" value="b"> b) map<br>
+            <input type="radio" name="q6" value="c"> c) sort<br>
+            <button onclick="checkQuiz('q6', 'b', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+    </div>
 
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li><code>map()</code>, <code>filter()</code>, <code>reduce()</code> e <code>forEach()</code> accettano funzioni come parametri.</li>
-      <li>Le funzioni possono essere trattate come valori e passate ad altre funzioni.</li>
-      <li>Questo concetto è la base della programmazione funzionale in JavaScript.</li>
-    </ul>
-  </div>
-
-  <h3>Riepilogo Metodi Principali</h3>
-  <div class="table-container">
-    <table>
-      <thead><tr><th>Metodo</th><th>Scopo</th><th>Restituisce Nuovo Array?</th></tr></thead>
-      <tbody>
-        <tr><td><code>forEach()</code></td><td>Esegue una funzione per ogni elemento</td><td class="false-cell">No</td></tr>
-        <tr><td><code>map()</code></td><td>Trasforma ogni elemento</td><td class="true-cell">Sì</td></tr>
-        <tr><td><code>filter()</code></td><td>Filtra elementi in base a una condizione</td><td class="true-cell">Sì</td></tr>
-        <tr><td><code>reduce()</code></td><td>Combina tutti gli elementi in un singolo valore</td><td class="false-cell">No (ritorna un valore)</td></tr>
-        <tr><td><code>sort()</code></td><td>Ordina gli elementi (modifica l'array originale)</td><td class="false-cell">No</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="important"><strong>CONSIGLIO PER LA PROVA:</strong> Molti esercizi di Laboratorio I riguardano combinazioni di <code>map()</code>, <code>filter()</code> e <code>reduce()</code>. Allenati a riconoscerne la logica e la differenza.</div>
-</div>
-
-<!-- ====================== LEZIONE 7 ====================== -->
-<div class="lesson" id="lezione7">
-  <h2>Lezione 7: Ordinamenti, Oggetti e Applicazioni Pratiche</h2>
-  <h3>Ordinare gli Array</h3>
-  <p>Il metodo <code>sort()</code> serve per ordinare gli elementi di un array. Tuttavia, il comportamento predefinito è spesso ingannevole: JavaScript ordina gli elementi come <strong>stringhe</strong>, non come numeri.</p>
-  <div class="example"><pre>let numeri = [4, 7, 22, 10, -1, 8];
+    <!-- ====================== LEZIONE 7 ====================== -->
+    <div class="lesson" id="lezione7">
+        <h2>📈 Lezione 7: Ordinamenti, Oggetti e Applicazioni Pratiche</h2>
+        <h3>Ordinare gli Array</h3>
+        <p>Il metodo <code>sort()</code> serve per ordinare gli elementi di un array. Tuttavia, il comportamento predefinito è spesso ingannevole: JavaScript ordina gli elementi come <strong>stringhe</strong>, non come numeri.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let numeri = [4, 7, 22, 10, -1, 8];
 numeri.sort();
 console.log(numeri); // Output: [-1, 10, 22, 4, 7, 8]</pre></div>
-  <div class="warning"><strong>ATTENZIONE:</strong> Senza una funzione di confronto, <code>sort()</code> effettua un ordinamento alfabetico (lessicografico).</div>
-
-  <h3>Ordinamento Corretto dei Numeri</h3>
-  <p>Per ordinare numeri in modo corretto, si passa a <code>sort()</code> una <strong>funzione di confronto</strong> che stabilisce come confrontare i valori:</p>
-  <div class="example"><pre>// Ordinamento crescente
+        <div class="warning"><strong>ATTENZIONE:</strong> Senza una funzione di confronto, <code>sort()</code> effettua un ordinamento alfabetico (lessicografico).</div>
+        <h3>Ordinamento Corretto dei Numeri</h3>
+        <p>Per ordinare numeri in modo corretto, si passa a <code>sort()</code> una <strong>funzione di confronto</strong> che stabilisce come confrontare i valori:</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Ordinamento crescente
 numeri.sort((a, b) => a - b);
 console.log(numeri); // [-1, 4, 7, 8, 10, 22]
 // Ordinamento decrescente
 numeri.sort((a, b) => b - a);
 console.log(numeri); // [22, 10, 8, 7, 4, -1]</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Il valore restituito dalla funzione di confronto determina l'ordine:
-    <ul>
-      <li>Se &lt; 0 → <code>a</code> viene prima di <code>b</code></li>
-      <li>Se &gt; 0 → <code>a</code> viene dopo di <code>b</code></li>
-      <li>Se = 0 → l'ordine resta invariato</li>
-    </ul>
-  </div>
-
-  <h3>Ordinamento di Stringhe</h3>
-  <p>Le stringhe vengono ordinate automaticamente in base al loro codice Unicode. Per ordinamenti alfabetici sensibili alle maiuscole/minuscole, usa <code>localeCompare()</code>.</p>
-  <div class="example"><pre>let nomi = ["Andrea", "luca", "Marco", "anna"];
+        <div class="tip"><strong>TRUCCO:</strong> Il valore restituito dalla funzione di confronto determina l'ordine: <ul>
+                <li>Se &lt; 0 → <code>a</code> viene prima di <code>b</code></li>
+                <li>Se &gt; 0 → <code>a</code> viene dopo di <code>b</code></li>
+                <li>Se = 0 → l'ordine resta invariato</li>
+            </ul> </div>
+        <h3>Ordinamento di Stringhe</h3>
+        <p>Le stringhe vengono ordinate automaticamente in base al loro codice Unicode. Per ordinamenti alfabetici sensibili alle maiuscole/minuscole, usa <code>localeCompare()</code>.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let nomi = ["Andrea", "luca", "Marco", "anna"];
 nomi.sort((a, b) => a.localeCompare(b, 'it', { sensitivity: 'base' }));
 console.log(nomi); // Output: ["Andrea", "anna", "luca", "Marco"]</pre></div>
-  <div class="important"><strong>NOTA:</strong> <code>localeCompare()</code> tiene conto della lingua e ignora le differenze tra maiuscole e minuscole.</div>
-
-  <h3>Ordinamento di Oggetti</h3>
-  <p>Spesso si devono ordinare array di oggetti (ad esempio, studenti con nome e voto). In questo caso, si specifica quale proprietà confrontare.</p>
-  <div class="example"><pre>let studenti = [
-  { nome: "Luca", voto: 25 },
-  { nome: "Anna", voto: 30 },
-  { nome: "Andrea", voto: 28 }
+        <div class="important"><strong>NOTA:</strong> <code>localeCompare()</code> tiene conto della lingua e ignora le differenze tra maiuscole e minuscole.</div>
+        <h3>Ordinamento di Oggetti</h3>
+        <p>Spesso si devono ordinare array di oggetti (ad esempio, studenti con nome e voto). In questo caso, si specifica quale proprietà confrontare.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let studenti = [
+    { nome: "Luca", voto: 25 },
+    { nome: "Anna", voto: 30 },
+    { nome: "Andrea", voto: 28 }
 ];
 // Ordinamento per voto crescente
 studenti.sort((a, b) => a.voto - b.voto);
 // Ordinamento per nome alfabetico
 studenti.sort((a, b) => a.nome.localeCompare(b.nome));
 console.table(studenti);</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Puoi concatenare più criteri di ordinamento, ad esempio:
-    <div class="example"><pre>// Prima per voto decrescente, poi per nome
+        <div class="tip"><strong>TRUCCO:</strong> Puoi concatenare più criteri di ordinamento, ad esempio: <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Prima per voto decrescente, poi per nome
 studenti.sort((a, b) => {
-  if (b.voto !== a.voto) return b.voto - a.voto;
-  return a.nome.localeCompare(b.nome);
-});</pre></div>
-  </div>
-
-  <h3>Oggetti Annidati e Accesso ai Dati</h3>
-  <p>Gli oggetti possono contenere altri oggetti o array. Si accede ai valori combinando la <em>dot notation</em> (<code>.</code>) e la <em>bracket notation</em> (<code>[]</code>).</p>
-  <div class="example"><pre>let corso = {
-  nome: "Laboratorio I",
-  studenti: [
-    { nome: "Luca", voto: 25 },
-    { nome: "Anna", voto: 30 }
-  ]
+    if (b.voto !== a.voto)
+        return b.voto - a.voto;
+    return a.nome.localeCompare(b.nome);
+});</pre></div> </div>
+        <h3>Oggetti Annidati e Accesso ai Dati</h3>
+        <p>Gli oggetti possono contenere altri oggetti o array. Si accede ai valori combinando la <em>dot notation</em> (<code>.</code>) e la <em>bracket notation</em> (<code>[]</code>).</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let corso = {
+    nome: "Laboratorio I",
+    studenti: [
+        { nome: "Luca", voto: 25 },
+        { nome: "Anna", voto: 30 }
+    ]
 };
 console.log(corso.studenti[1].nome); // Anna
 console.log(corso.studenti[0].voto); // 25</pre></div>
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li><code>oggetto.proprietà</code> accede direttamente a un valore noto.</li>
-      <li><code>oggetto["chiave"]</code> è utile quando la chiave è dinamica o contiene spazi.</li>
-      <li>Puoi combinare entrambi i metodi per accedere a strutture complesse.</li>
-    </ul>
-  </div>
-
-  <h3>Funzioni Applicate a Oggetti e Array</h3>
-  <p>Grazie alle funzioni di ordine superiore, possiamo trasformare o filtrare dati complessi in modo molto compatto.</p>
-  <div class="example"><pre>// Estrarre solo i nomi degli studenti promossi
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li><code>oggetto.proprietà</code> accede direttamente a un valore noto.</li>
+                <li><code>oggetto["chiave"]</code> è utile quando la chiave è dinamica o contiene spazi.</li>
+                <li>Puoi combinare entrambi i metodi per accedere a strutture complesse.</li>
+            </ul>
+        </div>
+        <h3>Funzioni Applicate a Oggetti e Array</h3>
+        <p>Grazie alle funzioni di ordine superiore, possiamo trasformare o filtrare dati complessi in modo molto compatto.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Estrarre solo i nomi degli studenti promossi
 let promossi = corso.studenti
-  .filter(s => s.voto >= 26)
-  .map(s => s.nome);
+    .filter(s => s.voto >= 26)
+    .map(s => s.nome);
 console.log(promossi); // ["Anna"]</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Le funzioni <code>filter()</code> e <code>map()</code> si combinano perfettamente: la prima seleziona, la seconda trasforma.</div>
-
-  <h3>Uso del Metodo <code>reduce()</code> su Oggetti</h3>
-  <p>Puoi usare <code>reduce()</code> anche su array di oggetti, ad esempio per calcolare una media.</p>
-  <div class="example"><pre>let media = corso.studenti.reduce((acc, s) => acc + s.voto, 0) / corso.studenti.length;
+        <div class="tip"><strong>TRUCCO:</strong> Le funzioni <code>filter()</code> e <code>map()</code> si combinano perfettamente: la prima seleziona, la seconda trasforma.</div>
+        <h3>Uso del Metodo <code>reduce()</code> su Oggetti</h3>
+        <p>Puoi usare <code>reduce()</code> anche su array di oggetti, ad esempio per calcolare una media.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let media = corso.studenti.reduce((acc, s) => acc + s.voto, 0) / corso.studenti.length;
 console.log("Media voti:", media);</pre></div>
+        <div class="important"><strong>CONSIGLIO PER LA PROVA:</strong>
+            <ul>
+                <li>Ordinare oggetti secondo criteri multipli;</li>
+                <li>Estrarre e filtrare dati con <code>map()</code> e <code>filter()</code>;</li>
+                <li>Calcolare valori aggregati con <code>reduce()</code>.</li>
+            </ul>
+        </div>
+        <h3>Riepilogo Lezione</h3>
+        <ul>
+            <li><code>sort()</code> ordina alfabeticamente, ma puoi personalizzarlo con una funzione di confronto.</li>
+            <li><code>localeCompare()</code> ordina stringhe in base alla lingua.</li>
+            <li>Gli oggetti possono contenere array e viceversa.</li>
+            <li>I metodi <code>map()</code>, <code>filter()</code> e <code>reduce()</code> sono fondamentali per manipolare i dati.</li>
+        </ul>
+        <!-- Quiz Rapido -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Come ordinare numeri crescenti?</h4>
+            <p>La funzione di confronto per sort crescente è:</p>
+            <input type="radio" name="q7" value="a"> a) (a, b) => b - a<br>
+            <input type="radio" name="q7" value="b"> b) (a, b) => a - b<br>
+            <input type="radio" name="q7" value="c"> c) (a, b) => a + b<br>
+            <button onclick="checkQuiz('q7', 'b', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+    </div>
 
-  <div class="important"><strong>CONSIGLIO PER LA PROVA:</strong>
-    <ul>
-      <li>Ordinare oggetti secondo criteri multipli;</li>
-      <li>Estrarre e filtrare dati con <code>map()</code> e <code>filter()</code>;</li>
-      <li>Calcolare valori aggregati con <code>reduce()</code>.</li>
-    </ul>
-  </div>
-
-  <h3>Riepilogo Lezione</h3>
-  <ul>
-    <li><code>sort()</code> ordina alfabeticamente, ma puoi personalizzarlo con una funzione di confronto.</li>
-    <li><code>localeCompare()</code> ordina stringhe in base alla lingua.</li>
-    <li>Gli oggetti possono contenere array e viceversa.</li>
-    <li>I metodi <code>map()</code>, <code>filter()</code> e <code>reduce()</code> sono fondamentali per manipolare i dati.</li>
-  </ul>
-</div>
-
-<!-- ====================== LEZIONE 8 ====================== -->
-<div class="lesson" id="lezione8">
-  <h2>Lezione 8: Rappresentazione dei Dati e Numeri Binari</h2>
-  <h3>Introduzione</h3>
-  <p>I computer non comprendono numeri o lettere nel formato che usiamo noi. Tutti i dati — numeri, testo, immagini — vengono rappresentati come sequenze di <strong>bit</strong> (binary digits), cioè 0 e 1. Il sistema numerico usato è la <strong>base 2</strong> (binaria).</p>
-  <div class="tip"><strong>TRUCCO:</strong> Un singolo <em>bit</em> può assumere solo due valori (<code>0</code> o <code>1</code>), mentre un gruppo di 8 bit forma un <strong>byte</strong>.</div>
-
-  <h3>Rappresentazione in Base 2</h3>
-  <p>Nel sistema binario ogni cifra rappresenta una potenza di 2. Partendo da destra verso sinistra:</p>
-  <div class="example"><pre>Cifre: 1 0 1 1
+    <!-- ====================== LEZIONE 8 ====================== -->
+    <div class="lesson" id="lezione8">
+        <h2>🔢 Lezione 8: Rappresentazione dei Dati e Numeri Binari</h2>
+        <h3>Introduzione</h3>
+        <p>I computer non comprendono numeri o lettere nel formato che usiamo noi. Tutti i dati — numeri, testo, immagini — vengono rappresentati come sequenze di <strong>bit</strong> (binary digits), cioè 0 e 1. Il sistema numerico usato è la <strong>base 2</strong> (binaria).</p>
+        <div class="tip"><strong>TRUCCO:</strong> Un singolo <em>bit</em> può assumere solo due valori (<code>0</code> o <code>1</code>), mentre un gruppo di 8 bit forma un <strong>byte</strong>.</div>
+        <h3>Rappresentazione in Base 2</h3>
+        <p>Nel sistema binario ogni cifra rappresenta una potenza di 2. Partendo da destra verso sinistra:</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>Cifre: 1 0 1 1
 Posizioni: 2³ 2² 2¹ 2⁰
 Valore: 8 + 0 + 2 + 1 = 11 in decimale</pre></div>
-
-  <h4>Tabella di Conversione da Binario a Decimale</h4>
-  <div class="table-container">
-    <table>
-      <thead><tr><th>Binario</th><th>Valore Decimale</th></tr></thead>
-      <tbody>
-        <tr><td>0000</td><td>0</td></tr>
-        <tr><td>0001</td><td>1</td></tr>
-        <tr><td>0010</td><td>2</td></tr>
-        <tr><td>0011</td><td>3</td></tr>
-        <tr><td>0100</td>< 4</td></tr>
-        <tr><td>0101</td><td>5</td></tr>
-        <tr><td>0110</td><td>6</td></tr>
-        <tr><td>0111</td><td>7</td></tr>
-        <tr><td>1000</td><td>8</td></tr>
-        <tr><td>1001</td><td>9</td></tr>
-        <tr><td>1010</td><td>10</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>Conversione da Decimale a Binario</h3>
-  <p>Per convertire un numero decimale in binario si divide successivamente il numero per 2 e si annotano i resti (da leggere al contrario).</p>
-  <div class="example"><pre>Esempio: 13 in base 10
+        <h4>Tabella di Conversione da Binario a Decimale</h4>
+        <div class="table-container">
+            <table>
+                <caption>Conversione Binario-Decimale</caption>
+                <thead><tr><th scope="col">Binario</th><th scope="col">Valore Decimale</th></tr></thead>
+                <tbody>
+                    <tr><td>0000</td><td>0</td></tr>
+                    <tr><td>0001</td><td>1</td></tr>
+                    <tr><td>0010</td><td>2</td></tr>
+                    <tr><td>0011</td><td>3</td></tr>
+                    <tr><td>0100</td><td>4</td></tr>
+                    <tr><td>0101</td><td>5</td></tr>
+                    <tr><td>0110</td><td>6</td></tr>
+                    <tr><td>0111</td><td>7</td></tr>
+                    <tr><td>1000</td><td>8</td></tr>
+                    <tr><td>1001</td><td>9</td></tr>
+                    <tr><td>1010</td><td>10</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>Conversione da Decimale a Binario</h3>
+        <p>Per convertire un numero decimale in binario si divide successivamente il numero per 2 e si annotano i resti (da leggere al contrario).</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>Esempio: 13 in base 10
 13 / 2 = 6, resto 1
 6 / 2 = 3, resto 0
 3 / 2 = 1, resto 1
 1 / 2 = 0, resto 1
 Risultato: 13 = 1101₂</pre></div>
-  <div class="important"><strong>DA RICORDARE:</strong> Ogni cifra binaria vale una potenza di 2: <code>1 0 1 1</code> = (1×2³) + (0×2²) + (1×2¹) + (1×2⁰) = 11</div>
-
-  <h3>Numeri Negativi e Complemento a 2</h3>
-  <p>I numeri negativi non vengono rappresentati aggiungendo un segno "-". Nei computer si usa il metodo chiamato <strong>Complemento a 2 (C2)</strong>.</p>
-  <div class="example"><pre>Esempio con 8 bit:
+        <div class="important"><strong>DA RICORDARE:</strong> Ogni cifra binaria vale una potenza di 2: <code>1 0 1 1</code> = (1×2³) + (0×2²) + (1×2¹) + (1×2⁰) = 11</div>
+        <h3>Numeri Negativi e Complemento a 2</h3>
+        <p>I numeri negativi non vengono rappresentati aggiungendo un segno "-". Nei computer si usa il metodo chiamato <strong>Complemento a 2 (C2)</strong>.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>Esempio con 8 bit:
 +5 → 0000 0101
 -5 → complemento a 2:
-  1) Inverti tutti i bit → 1111 1010
-  2) Aggiungi 1 → 1111 1011</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Il Complemento a 2 permette di eseguire le sottrazioni come somme: <code>A - B = A + (Complemento a 2 di B)</code>.</div>
-
-  <h3>Rappresentazione con Segno e Modulo</h3>
-  <p>In alternativa (più teorica che pratica), il primo bit può rappresentare il segno:
-    <ul>
-      <li><code>0</code> = positivo</li>
-      <li><code>1</code> = negativo</li>
-    </ul>
-  </p>
-  <div class="example"><pre>8 bit → 1 bit per il segno + 7 bit per il valore
+1) Inverti tutti i bit → 1111 1010
+2) Aggiungi 1 → 1111 1011</pre></div>
+        <div class="tip"><strong>TRUCCO:</strong> Il Complemento a 2 permette di eseguire le sottrazioni come somme: <code>A - B = A + (Complemento a 2 di B)</code>.</div>
+        <h3>Rappresentazione con Segno e Modulo</h3>
+        <p>In alternativa (più teorica che pratica), il primo bit può rappresentare il segno: <ul>
+                <li><code>0</code> = positivo</li>
+                <li><code>1</code> = negativo</li>
+            </ul> </p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>8 bit → 1 bit per il segno + 7 bit per il valore
 +5 → 0000 0101
 -5 → 1000 0101</pre></div>
-  <div class="warning"><strong>ATTENZIONE:</strong> Questo metodo presenta due rappresentazioni per lo zero (+0 e -0), quindi non viene usato nei sistemi moderni.</div>
-
-  <h3>Overflow</h3>
-  <p>L'<strong>overflow</strong> si verifica quando il risultato di un'operazione supera l'intervallo rappresentabile con i bit disponibili.</p>
-  <div class="example"><pre>Esempio con 4 bit:
+        <div class="warning"><strong>ATTENZIONE:</strong> Questo metodo presenta due rappresentazioni per lo zero (+0 e -0), quindi non viene usato nei sistemi moderni.</div>
+        <h3>Overflow</h3>
+        <p>L'<strong>overflow</strong> si verifica quando il risultato di un'operazione supera l'intervallo rappresentabile con i bit disponibili.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>Esempio con 4 bit:
 6 = 0110
 + 3 = 0011
 -------------
 1001 = -7 (Overflow!)</pre></div>
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li>Nel complemento a 2, il bit più a sinistra è il "bit di segno".</li>
-      <li>Gli 8 bit possono rappresentare valori da -128 a +127.</li>
-      <li>Un overflow altera completamente il risultato numerico.</li>
-    </ul>
-  </div>
-
-  <h3>Rappresentazione di Caratteri (Codifica)</h3>
-  <p>I caratteri (lettere, simboli) vengono memorizzati anch'essi in forma binaria. Ogni carattere è associato a un numero secondo una tabella di codifica.</p>
-  <div class="table-container">
-    <table>
-      <thead><tr><th>Carattere</th><th>Codice Decimale</th><th>Codice Binario (8 bit)</th></tr></thead>
-      <tbody>
-        <tr><td>A</td><td>65</td><td>01000001</td></tr>
-        <tr><td>B</td><td>66</td><td>01000010</td></tr>
-        <tr><td>a</td><td>97</td><td>01100001</td></tr>
-        <tr><td>b</td><td>98</td><td>01100010</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tip"><strong>TRUCCO:</strong> Le codifiche più note sono:
-    <ul>
-      <li><strong>ASCII</strong> → 7 bit (128 simboli base);</li>
-      <li><strong>Unicode / UTF-8</strong> → sistema moderno che rappresenta caratteri di tutte le lingue del mondo.</li>
-    </ul>
-  </div>
-
-  <h3>Riepilogo Lezione</h3>
-  <ul>
-    <li>Tutti i dati nei computer sono rappresentati in binario.</li>
-    <li>Un byte è formato da 8 bit.</li>
-    <li>I numeri negativi vengono rappresentati in Complemento a 2.</li>
-    <li>Il bit più significativo (MSb) rappresenta il segno.</li>
-    <li>L'overflow si verifica quando il risultato eccede i limiti di rappresentazione.</li>
-    <li>I caratteri vengono codificati tramite tabelle (ASCII, Unicode).</li>
-  </ul>
-</div>
-
-<!-- ====================== LEZIONE 9 (continuazione) ====================== -->
-<h3>Riepilogo degli Operatori Bitwise</h3>
-<div class="table-container">
-  <table>
-    <thead><tr><th>Operatore</th><th>Nome</th><th>Effetto</th></tr></thead>
-    <tbody>
-      <tr><td><code>&amp;</code></td><td>AND</td><td>1 se entrambi i bit sono 1</td></tr>
-      <tr><td><code>|</code></td><td>OR</td><td>1 se almeno un bit è 1</td></tr>
-      <tr><td><code>^</code></td><td>XOR</td><td>1 se i bit sono diversi</td></tr>
-      <tr><td><code>~</code></td><td>NOT</td><td>Inverte tutti i bit</td></tr>
-      <tr><td><code>&lt;&lt;</code></td><td>Shift sinistra</td><td>Moltiplica per 2<sup>n</sup></td></tr>
-      <tr><td><code>&gt;&gt;</code></td><td>Shift destra</td><td>Divide per 2<sup>n</sup> (con segno)</td></tr>
-      <tr><td><code>&gt;&gt;&gt;</code></td><td>Shift destra senza segno</td><td>Divide per 2<sup>n</sup> (sempre positivo)</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="important"><strong>DA RICORDARE:</strong>
-  <ul>
-    <li>Gli operatori bitwise lavorano su interi a 32 bit.</li>
-    <li><code>&gt;&gt;&gt;</code> riempie con zeri a sinistra, <code>&gt;&gt;</code> con il bit di segno.</li>
-    <li>Usa <code>&amp;</code> per verificare flag, <code>|</code> per accenderli, <code>^</code> per invertirli.</li>
-  </ul>
-</div>
-
-<h3>Logica Booleana vs Bitwise</h3>
-<p>Non confondere gli operatori logici (<code>&amp;&amp;</code>, <code>||</code>, <code>!</code>) con quelli bitwise:</p>
-<div class="example"><pre>// Logici (valutano condizioni)
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li>Nel complemento a 2, il bit più a sinistra è il "bit di segno".</li>
+                <li>Gli 8 bit possono rappresentare valori da -128 a +127.</li>
+                <li>Un overflow altera completamente il risultato numerico.</li>
+            </ul>
+        </div>
+        <h3>Rappresentazione di Caratteri (Codifica)</h3>
+        <p>I caratteri (lettere, simboli) vengono memorizzati anch'essi in forma binaria. Ogni carattere è associato a un numero secondo una tabella di codifica.</p>
+        <div class="table-container">
+            <table>
+                <caption>Codifica Caratteri ASCII</caption>
+                <thead><tr><th scope="col">Carattere</th><th scope="col">Codice Decimale</th><th scope="col">Codice Binario (8 bit)</th></tr></thead>
+                <tbody>
+                    <tr><td>A</td><td>65</td><td>01000001</td></tr>
+                    <tr><td>B</td><td>66</td><td>01000010</td></tr>
+                    <tr><td>a</td><td>97</td><td>01100001</td></tr>
+                    <tr><td>b</td><td>98</td><td>01100010</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip"><strong>TRUCCO:</strong> Le codifiche più note sono: <ul>
+                <li><strong>ASCII</strong> → 7 bit (128 simboli base);</li>
+                <li><strong>Unicode / UTF-8</strong> → sistema moderno che rappresenta caratteri di tutte le lingue del mondo.</li>
+            </ul> </div>
+        <h3>Riepilogo Lezione</h3>
+        <ul>
+            <li>Tutti i dati nei computer sono rappresentati in binario.</li>
+            <li>Un byte è formato da 8 bit.</li>
+            <li>I numeri negativi vengono rappresentati in Complemento a 2.</li>
+            <li>Il bit più significativo (MSb) rappresenta il segno.</li>
+            <li>L'overflow si verifica quando il risultato eccede i limiti di rappresentazione.</li>
+            <li>I caratteri vengono codificati tramite tabelle (ASCII, Unicode).</li>
+        </ul>
+        <!-- Quiz Rapido -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Cos'è il complemento a 2?</h4>
+            <p>Serve per rappresentare:</p>
+            <input type="radio" name="q8" value="a"> a) Numeri positivi<br>
+            <input type="radio" name="q8" value="b"> b) Numeri negativi<br>
+            <input type="radio" name="q8" value="c"> c) Stringhe<br>
+            <button onclick="checkQuiz('q8', 'b', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+        <h3>Riepilogo degli Operatori Bitwise</h3>
+        <div class="table-container">
+            <table>
+                <caption>Operatori Bitwise</caption>
+                <thead><tr><th scope="col">Operatore</th><th scope="col">Nome</th><th scope="col">Effetto</th></tr></thead>
+                <tbody>
+                    <tr><td><code>&amp;</code></td><td>AND</td><td>1 se entrambi i bit sono 1</td></tr>
+                    <tr><td><code>|</code></td><td>OR</td><td>1 se almeno un bit è 1</td></tr>
+                    <tr><td><code>^</code></td><td>XOR</td><td>1 se i bit sono diversi</td></tr>
+                    <tr><td><code>~</code></td><td>NOT</td><td>Inverte tutti i bit</td></tr>
+                    <tr><td><code>&lt;&lt;</code></td><td>Shift sinistra</td><td>Moltiplica per 2<sup>n</sup></td></tr>
+                    <tr><td><code>&gt;&gt;</code></td><td>Shift destra</td><td>Divide per 2<sup>n</sup> (con segno)</td></tr>
+                    <tr><td><code>&gt;&gt;&gt;</code></td><td>Shift destra senza segno</td><td>Divide per 2<sup>n</sup> (sempre positivo)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li>Gli operatori bitwise lavorano su interi a 32 bit.</li>
+                <li><code>&gt;&gt;&gt;</code> riempie con zeri a sinistra, <code>&gt;&gt;</code> con il bit di segno.</li>
+                <li>Usa <code>&amp;</code> per verificare flag, <code>|</code> per accenderli, <code>^</code> per invertirli.</li>
+            </ul>
+        </div>
+        <h3>Logica Booleana vs Bitwise</h3>
+        <p>Non confondere gli operatori logici (<code>&amp;&amp;</code>, <code>||</code>, <code>!</code>) con quelli bitwise:</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Logici (valutano condizioni)
 if (eta > 18 && patente) { ... }
-
 // Bitwise (operano sui bit)
 let permessi = 0b1010; // 10 in binario
-if (permessi & 0b0010) { console.log("Permesso 2 attivo"); }</pre></div>
-<div class="warning"><strong>ATTENZIONE:</strong> <code>&amp;&amp;</code> e <code>||</code> usano <em>short-circuit</em>: se il primo operando decide il risultato, il secondo non viene valutato. Gli operatori bitwise valutano sempre entrambi gli operandi.</div>
-</div>
+if (permessi & 0b0010) {
+    console.log("Permesso 2 attivo");
+}</pre></div>
+        <div class="warning"><strong>ATTENZIONE:</strong> <code>&amp;&amp;</code> e <code>||</code> usano <em>short-circuit</em>: se il primo operando decide il risultato, il secondo non viene valutato. Gli operatori bitwise valutano sempre entrambi gli operandi.</div>
+        <!-- Quiz Rapido per Bitwise (L9 continuation) -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Operatore AND bitwise?</h4>
+            <p>È:</p>
+            <input type="radio" name="q9" value="a"> a) ||<br>
+            <input type="radio" name="q9" value="b"> b) &amp;<br>
+            <input type="radio" name="q9" value="c"> c) !<br>
+            <button onclick="checkQuiz('q9', 'b', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+    </div>
 
-<!-- ====================== LEZIONE 10 ====================== -->
-<div class="lesson" id="lezione10">
-  <h2>Lezione 10: Funzioni Avanzate, Parametri e Ricorsione (Parte 1)</h2>
-  <h3>Parametri di Default</h3>
-  <p>In ES6 è possibile assegnare valori di default ai parametri di una funzione. Se il parametro non viene passato, viene usato il valore predefinito.</p>
-  <div class="example"><pre>function saluta(nome = "Ospite") {
-  console.log("Ciao, " + nome + "!");
+    <!-- ====================== LEZIONE 10 ====================== -->
+    <div class="lesson" id="lezione10">
+        <h2>♻️ Lezione 10: Funzioni Avanzate, Parametri e Ricorsione (Parte 1)</h2>
+        <h3>Parametri di Default</h3>
+        <p>In ES6 è possibile assegnare valori di default ai parametri di una funzione. Se il parametro non viene passato, viene usato il valore predefinito.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>function saluta(nome = "Ospite") {
+    console.log("Ciao, " + nome + "!");
 }
-saluta();        // Ciao, Ospite!
-saluta("Luca");  // Ciao, Luca!</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> I parametri di default possono essere espressioni o riferimenti ad altri parametri:
-    <pre>function creaUtente(nome, ruolo = "utente", id = generaId()) { ... }</pre>
-  </div>
-
-  <h3>Parametri Rest (Spread)</h3>
-  <p>Il parametro <code>...args</code> raccoglie tutti gli argomenti extra in un array. È utile per funzioni con numero variabile di parametri.</p>
-  <div class="example"><pre>function somma(...numeri) {
-  return numeri.reduce((acc, n) => acc + n, 0);
+saluta(); // Ciao, Ospite!
+saluta("Luca"); // Ciao, Luca!</pre></div>
+        <div class="tip"><strong>TRUCCO:</strong> I parametri di default possono essere espressioni o riferimenti ad altri parametri: <pre><button class="copy-btn" onclick="copyCode(this)">📋</button>function creaUtente(nome, ruolo = "utente", id = generaId()) { ... }</pre> </div>
+        <h3>Parametri Rest (Spread)</h3>
+        <p>Il parametro <code>...args</code> raccoglie tutti gli argomenti extra in un array. È utile per funzioni con numero variabile di parametri.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>function somma(...numeri) {
+    return numeri.reduce((acc, n) => acc + n, 0);
 }
 console.log(somma(1, 2, 3, 4)); // 10</pre></div>
-  <div class="important"><strong>DA RICORDARE:</strong> Il parametro rest deve essere l’ultimo nella lista dei parametri.</div>
-
-  <h3>Spread Operator</h3>
-  <p>L’operatore <code>...</code> può anche essere usato per “espandere” array o oggetti.</p>
-  <div class="example"><pre>let a = [1, 2, 3];
+        <div class="important"><strong>DA RICORDARE:</strong> Il parametro rest deve essere l'ultimo nella lista dei parametri.</div>
+        <h3>Spread Operator</h3>
+        <p>L'operatore <code>...</code> può anche essere usato per "espandere" array o oggetti.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>let a = [1, 2, 3];
 let b = [...a, 4, 5]; // [1, 2, 3, 4, 5]
 let obj1 = { nome: "Luca" };
 let obj2 = { ...obj1, eta: 25 };</pre></div>
-
-  <h3>Funzioni Ricorsive</h3>
-  <p>Una funzione è <strong>ricorsiva</strong> se chiama se stessa. È utile per problemi che possono essere scomposti in sottoproblemi identici.</p>
-  <div class="example"><pre>// Fattoriale
+        <h3>Funzioni Ricorsive</h3>
+        <p>Una funzione è <strong>ricorsiva</strong> se chiama se stessa. È utile per problemi che possono essere scomposti in sottoproblemi identici.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Fattoriale
 function fattoriale(n) {
-  if (n === 0 || n === 1) return 1;
-  return n * fattoriale(n - 1);
+    if (n === 0 || n === 1) return 1;
+    return n * fattoriale(n - 1);
 }
 console.log(fattoriale(5)); // 120</pre></div>
-  <div class="warning"><strong>ATTENZIONE:</strong> Ogni chiamata ricorsiva crea un nuovo frame nello <em>call stack</em>. Troppe chiamate → <code>Stack Overflow</code>.</div>
-
-  <h3>Condizioni di Terminazione</h3>
-  <p>Ogni funzione ricorsiva deve avere almeno una <strong>condizione di base</strong> (o caso base) che ferma la ricorsione.</p>
-  <div class="example"><pre>function contoAllaRovescia(n) {
-  if (n <= 0) {
-    console.log("Via!");
-    return;
-  }
-  console.log(n);
-  contoAllaRovescia(n - 1);
+        <div class="warning"><strong>ATTENZIONE:</strong> Ogni chiamata ricorsiva crea un nuovo frame nello <em>call stack</em>. Troppe chiamate → <code>Stack Overflow</code>.</div>
+        <h3>Condizioni di Terminazione</h3>
+        <p>Ogni funzione ricorsiva deve avere almeno una <strong>condizione di base</strong> (o caso base) che ferma la ricorsione.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>function contoAllaRovescia(n) {
+    if (n <= 0) {
+        console.log("Via!");
+        return;
+    }
+    console.log(n);
+    contoAllaRovescia(n - 1);
 }</pre></div>
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li>Parametri di default → semplificano le chiamate.</li>
+                <li><code>...args</code> → numero variabile di argomenti.</li>
+                <li>Ricorsione → potente, ma consuma memoria.</li>
+                <li>Sempre una condizione di base!</li>
+            </ul>
+        </div>
+        <!-- Quiz Rapido -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Parametro rest?</h4>
+            <p>Si usa come:</p>
+            <input type="radio" name="q10" value="a"> a) ...args<br>
+            <input type="radio" name="q10" value="b"> b) =default<br>
+            <input type="radio" name="q10" value="c"> c) return<br>
+            <button onclick="checkQuiz('q10', 'a', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+    </div>
 
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li>Parametri di default → semplificano le chiamate.</li>
-      <li><code>...args</code> → numero variabile di argomenti.</li>
-      <li>Ricorsione → potente, ma consuma memoria.</li>
-      <li>Sempre una condizione di base!</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ====================== LEZIONE 11 ====================== -->
-<div class="lesson" id="lezione11">
-  <h2>Lezione 11: Ricorsione Avanzata, Ottimizzazione e Stack Overflow</h2>
-  <h3>Ricorsione con Più Chiamate</h3>
-  <p>Alcuni problemi (es. sequenza di Fibonacci) richiedono più chiamate ricorsive per ogni passo.</p>
-  <div class="example"><pre>// Fibonacci (versione ingenua)
+    <!-- ====================== LEZIONE 11 ====================== -->
+    <div class="lesson" id="lezione11">
+        <h2>🔄 Lezione 11: Ricorsione Avanzata, Ottimizzazione e Stack Overflow</h2>
+        <h3>Ricorsione con Più Chiamate</h3>
+        <p>Alcuni problemi (es. sequenza di Fibonacci) richiedono più chiamate ricorsive per ogni passo.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Fibonacci (versione ingenua)
 function fib(n) {
-  if (n <= 1) return n;
-  return fib(n - 1) + fib(n - 2);
+    if (n <= 1) return n;
+    return fib(n - 1) + fib(n - 2);
 }
 console.log(fib(10)); // 55</pre></div>
-  <div class="warning"><strong>PROBLEMA:</strong> Questa versione ha complessità esponenziale (O(2ⁿ)) → lenta per n grandi.</div>
-
-  <h3>Memoizzazione</h3>
-  <p>La <strong>memoizzazione</strong> memorizza i risultati di chiamate precedenti per evitare calcoli ripetuti.</p>
-  <div class="example"><pre>function fibMemo(n, memo = {}) {
-  if (n in memo) return memo[n];
-  if (n <= 1) return n;
-  memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo);
-  return memo[n];
+        <div class="warning"><strong>PROBLEMA:</strong> Questa versione ha complessità esponenziale (O(2ⁿ)) → lenta per n grandi.</div>
+        <h3>Memoizzazione</h3>
+        <p>La <strong>memoizzazione</strong> memorizza i risultati di chiamate precedenti per evitare calcoli ripetuti.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>function fibMemo(n, memo = {}) {
+    if (n in memo) return memo[n];
+    if (n <= 1) return n;
+    memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo);
+    return memo[n];
 }
 console.log(fibMemo(50)); // Veloce!</pre></div>
-  <div class="tip"><strong>TRUCCO:</strong> Usa un oggetto o un array come cache per salvare i risultati intermedi.</div>
-
-  <h3>Ricorsione vs Iterazione</h3>
-  <p>Molti problemi ricorsivi possono essere risolti con cicli (iterazione), spesso più efficienti in termini di memoria.</p>
-  <div class="example"><pre>// Fattoriale iterativo
+        <div class="tip"><strong>TRUCCO:</strong> Usa un oggetto o un array come cache per salvare i risultati intermedi.</div>
+        <h3>Ricorsione vs Iterazione</h3>
+        <p>Molti problemi ricorsivi possono essere risolti con cicli (iterazione), spesso più efficienti in termini di memoria.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Fattoriale iterativo
 function fattorialeIter(n) {
-  let res = 1;
-  for (let i = 2; i <= n; i++) res *= i;
-  return res;
+    let res = 1;
+    for (let i = 2; i <= n; i++)
+        res *= i;
+    return res;
 }</pre></div>
-
-  <h3>Tail Recursion (Ottimizzazione)</h3>
-  <p>Una ricorsione è <em>tail</em> se l’ultima operazione è la chiamata ricorsiva. Alcuni linguaggi (non JavaScript) la ottimizzano eliminando i frame inutili.</p>
-  <div class="example"><pre>// Versione tail-recursive
+        <h3>Tail Recursion (Ottimizzazione)</h3>
+        <p>Una ricorsione è <em>tail</em> se l'ultima operazione è la chiamata ricorsiva. Alcuni linguaggi (non JavaScript) la ottimizzano eliminando i frame inutili.</p>
+        <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>// Versione tail-recursive
 function fattorialeTail(n, acc = 1) {
-  if (n <= 1) return acc;
-  return fattorialeTail(n - 1, acc * n);
+    if (n <= 1) return acc;
+    return fattorialeTail(n - 1, acc * n);
 }</pre></div>
+        <h3>Stack Overflow</h3>
+        <p>Ogni chiamata ricorsiva aggiunge un frame al <em>call stack</em>. Se il limite viene superato → <code>RangeError: Maximum call stack size exceeded</code>.</p>
+        <div class="tip"><strong>SOLUZIONE:</strong> <ul>
+                <li>Aumenta il limite (non possibile in browser)</li>
+                <li>Usa iterazione</li>
+                <li>Memoizzazione</li>
+                <li>Converti in ciclo</li>
+            </ul> </div>
+        <div class="important"><strong>DA RICORDARE:</strong>
+            <ul>
+                <li>La ricorsione è elegante ma può essere lenta e consumare memoria.</li>
+                <li>La memoizzazione trasforma problemi esponenziali in lineari.</li>
+                <li>Preferisci l'iterazione per problemi semplici o con input grandi.</li>
+                <li>Ogni ricorsione deve avere un caso base.</li>
+            </ul>
+        </div>
+        <!-- Quiz Rapido -->
+        <div class="quiz">
+            <h4>🧠 Quiz Rapido: Cos'è la memoizzazione?</h4>
+            <p>Serve a:</p>
+            <input type="radio" name="q11" value="a"> a) Evitare calcoli ripetuti<br>
+            <input type="radio" name="q11" value="b"> b) Creare loop infiniti<br>
+            <input type="radio" name="q11" value="c"> c) Cambiare scope<br>
+            <button onclick="checkQuiz('q11', 'a', this)">Verifica</button>
+            <div class="quiz-result"></div>
+        </div>
+    </div>
 
-  <h3>Stack Overflow</h3>
-  <p>Ogni chiamata ricorsiva aggiunge un frame al <em>call stack</em>. Se il limite viene superato → <code>RangeError: Maximum call stack size exceeded</code>.</p>
-  <div class="tip"><strong>SOLUZIONE:</strong>
-    <ul>
-      <li>Aumenta il limite (non possibile in browser)</li>
-      <li>Usa iterazione</li>
-      <li>Memoizzazione</li>
-      <li>Converti in ciclo</li>
-    </ul>
-  </div>
+    <!-- ====================== RIEPILOGO ====================== -->
+    <div class="lesson" id="riepilogo">
+        <h2>📝 Punti Chiave e Riepilogo</h2>
+        <h3>JavaScript in Pillole</h3>
+        <ul>
+            <li>Linguaggio interpretato, debolmente tipato</li>
+            <li>Eseguito nei browser e con Node.js lato server</li>
+            <li>Aggiornato annualmente (ECMAScript)</li>
+            <li>Molto flessibile ma attenzione alle conversioni automatiche</li>
+        </ul>
+        <h3>Best Practices</h3>
+        <ol>
+            <li>Usate <code>===</code> e <code>!==</code> invece di <code>==</code> e <code>!=</code></li>
+            <li>Preferite <code>let</code> e <code>const</code> a <code>var</code></li>
+            <li>Utilizzate i template literal per stringhe complesse</li>
+            <li>Fate attenzione al type coercion</li>
+            <li>Testate sempre il codice con valori edge case</li>
+        </ol>
+        <h3>Metodi Array Fondamentali</h3>
+        <div class="table-container">
+            <table>
+                <caption>Metodi Array Fondamentali</caption>
+                <thead><tr><th scope="col">Metodo</th><th scope="col">Scopo</th><th scope="col">Modifica Originale?</th></tr></thead>
+                <tbody>
+                    <tr><td><code>map()</code></td><td>Trasforma</td><td>No</td></tr>
+                    <tr><td><code>filter()</code></td><td>Seleziona</td><td>No</td></tr>
+                    <tr><td><code>reduce()</code></td><td>Aggrega</td><td>No</td></tr>
+                    <tr><td><code>sort()</code></td><td>Ordina</td><td>Sì</td></tr>
+                    <tr><td><code>forEach()</code></td><td>Esegue azione</td><td>No</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>Risorse Utili</h3>
+        <ul>
+            <li><strong>TypeScript Playground:</strong> typescriptlang.org/play</li>
+            <li><strong>Evo:</strong> evo.di.unipi.it</li>
+            <li><strong>MDN Web Docs:</strong> developer.mozilla.org</li>
+            <li><strong>Stack Overflow:</strong> Per domande e soluzioni</li>
+        </ul>
+        <div class="important"><strong>NOTA BENE FINALE:</strong> La programmazione si impara praticando. Fate molti esercizi, sperimentate con il codice e non abbiate paura di sbagliare. Gli errori sono opportunità di apprendimento!</div>
+    </div>
 
-  <div class="important"><strong>DA RICORDARE:</strong>
-    <ul>
-      <li>La ricorsione è elegante ma può essere lenta e consumare memoria.</li>
-      <li>La memoizzazione trasforma problemi esponenziali in lineari.</li>
-      <li>Preferisci l’iterazione per problemi semplici o con input grandi.</li>
-      <li>Ogni ricorsione deve avere un caso base.</li>
-    </ul>
-  </div>
-</div>
+    <footer>
+        <p>Riepilogo creato basandosi sulle lezioni del Laboratorio 1 - Corso di Informatica</p>
+        <p>Ultimo aggiornamento: <span id="update-date"></span></p>
+    </footer>
 
-<!-- ====================== RIEPILOGO ====================== -->
-<div class="lesson" id="riepilogo">
-  <h2>Punti Chiave e Riepilogo</h2>
-  <h3>JavaScript in Pillole</h3>
-  <ul>
-    <li>Linguaggio interpretato, debolmente tipato</li>
-    <li>Eseguito nei browser e con Node.js lato server</li>
-    <li>Aggiornato annualmente (ECMAScript)</li>
-    <li>Molto flessibile ma attenzione alle conversioni automatiche</li>
-  </ul>
+    <!-- BOTTONE TORNA IN CIMA -->
+    <button id="backToTop" title="Torna in cima" aria-label="Torna all'inizio della pagina">↑</button>
 
-  <h3>Best Practices</h3>
-  <ol>
-    <li>Usate <code>===</code> e <code>!==</code> invece di <code>==</code> e <code>!=</code></li>
-    <li>Preferite <code>let</code> e <code>const</code> a <code>var</code></li>
-    <li>Utilizzate i template literal per stringhe complesse</li>
-    <li>Fate attenzione al type coercion</li>
-    <li>Testate sempre il codice con valori edge case</li>
-  </ol>
+    <!-- SCRIPT RICERCA + BACK TO TOP + DARK MODE + COPY + QUIZ + DATA -->
+    <script>
+        // Data dinamica
+        document.getElementById('update-date').textContent = new Date().toLocaleDateString('it-IT', { month: 'long', year: 'numeric' });
 
-  <h3>Metodi Array Fondamentali</h3>
-  <div class="table-container">
-    <table>
-      <thead><tr><th>Metodo</th><th>Scopo</th><th>Modifica Originale?</th></tr></thead>
-      <tbody>
-        <tr><td><code>map()</code></td><td>Trasforma</td><td>No</td></tr>
-        <tr><td><code>filter()</code></td><td>Seleziona</td><td>No</td></tr>
-        <tr><td><code>reduce()</code></td><td>Aggrega</td><td>No</td></tr>
-        <tr><td><code>sort()</code></td><td>Ordina</td><td>Sì</td></tr>
-        <tr><td><code>forEach()</code></td><td>Esegue azione</td><td>No</td></tr>
-      </tbody>
-    </table>
-  </div>
+        // Dark Mode
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.body.setAttribute('data-theme', savedTheme);
+        document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
-  <h3>Risorse Utili</h3>
-  <ul>
-    <li><strong>TypeScript Playground:</strong> typescriptlang.org/play</li>
-    <li><strong>Evo:</strong> evo.di.unipi.it</li>
-    <li><strong>MDN Web Docs:</strong> developer.mozilla.org</li>
-    <li><strong>Stack Overflow:</strong> Per domande e soluzioni</li>
-  </ul>
+        // Back to Top
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 400) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-  <div class="important"><strong>NOTA BENE FINALE:</strong> La programmazione si impara praticando. Fate molti esercizi, sperimentate con il codice e non abbiate paura di sbagliare. Gli errori sono opportunità di apprendimento!</div>
-</div>
+        // Copy Code (migliorato)
+        function copyCode(btn) {
+            const pre = btn.parentNode;
+            const code = pre.textContent.replace(btn.textContent, '').trim();
+            navigator.clipboard.writeText(code).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✅ Copiato!';
+                setTimeout(() => btn.textContent = original, 2000);
+            }).catch(() => alert('Copia manuale richiesta!'));
+        }
 
-<footer>
-  <p>Riepilogo creato basandosi sulle lezioni del Laboratorio 1 - Corso di Informatica</p>
-  <p>Ultimo aggiornamento: Novembre 2025</p>
-</footer>
+        // Quiz
+        function checkQuiz(name, correct, btn) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            const result = btn.parentElement.querySelector('.quiz-result');
+            if (selected && selected.value === correct) {
+                result.textContent = '✅ Corretto!';
+                result.style.color = 'green';
+            } else {
+                result.textContent = '❌ Sbagliato! Riprova.';
+                result.style.color = 'red';
+            }
+        }
 
-<!-- SCRIPT RICERCA -->
-<script>
-  function searchText() {
-    clearSearch();
-    const input = document.getElementById('searchInput').value.trim();
-    if (!input) return;
-
-    const regex = new RegExp(input, 'gi');
-    const walker = document.createTreeWalker(
-      document.body,
-      NodeFilter.SHOW_TEXT,
-      null,
-      false
-    );
-
-    const nodesToHighlight = [];
-    let node;
-    while (node = walker.nextNode()) {
-      if (regex.test(node.nodeValue)) {
-        nodesToHighlight.push(node);
-      }
-    }
-
-    if (nodesToHighlight.length === 0) {
-      alert("Nessun risultato trovato per: \"" + input + "\"");
-      return;
-    }
-
-    nodesToHighlight.forEach(textNode => {
-      const parent = textNode.parentNode;
-      const span = document.createElement('span');
-      span.style.backgroundColor = '#fff3cd';
-      span.style.color = '#d39c12';
-      span.style.padding = '0 2px';
-      span.style.borderRadius = '2px';
-      span.innerHTML = textNode.nodeValue.replace(regex, match => 
-        `<mark style="background:#f39c12; color:white; padding:0 2px; border-radius:2px;">${match}</mark>`
-      );
-      parent.replaceChild(span, textNode);
-    });
-
-    document.querySelector('mark')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  function clearSearch() {
-    document.querySelectorAll('mark').forEach(mark => {
-      const parent = mark.parentNode;
-      parent.replaceChild(document.createTextNode(mark.textContent), mark);
-      parent.normalize();
-    });
-    document.querySelectorAll('span[style*="background-color"]').forEach(span => {
-      const parent = span.parentNode;
-      while (span.firstChild) {
-        parent.insertBefore(span.firstChild, span);
-      }
-      parent.removeChild(span);
-      parent.normalize();
-    });
-  }
-
-  document.getElementById('searchInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') searchText();
-  });
-</script>
+        // SCRIPT RICERCA (migliorata con contatore)
+        let searchResults = 0;
+        function searchText() {
+            clearSearch();
+            const input = document.getElementById('searchInput').value.trim();
+            if (!input) return;
+            const regex = new RegExp(input, 'gi');
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            const nodesToHighlight = [];
+            let node;
+            while (node = walker.nextNode()) {
+                if (regex.test(node.nodeValue)) {
+                    nodesToHighlight.push(node);
+                }
+            }
+            searchResults = nodesToHighlight.length;
+            if (searchResults === 0) {
+                alert(`Nessun risultato trovato per: "${input}"`);
+                return;
+            }
+            alert(`Trovati ${searchResults} risultati. Scorri per vederli evidenziati.`);
+            nodesToHighlight.forEach((textNode, index) => {
+                const parent = textNode.parentNode;
+                const span = document.createElement('span');
+                span.style.backgroundColor = '#fff3cd';
+                span.style.color = '#d39c12';
+                span.style.padding = '0 2px';
+                span.style.borderRadius = '2px';
+                span.innerHTML = textNode.nodeValue.replace(regex, match => `<mark style="background:#f39c12; color:white; padding:0 2px; border-radius:2px;">${match}</mark>`);
+                parent.replaceChild(span, textNode);
+                if (index === 0) span.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        }
+        function clearSearch() {
+            document.querySelectorAll('mark').forEach(mark => {
+                const parent = mark.parentNode;
+                parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                parent.normalize();
+            });
+            document.querySelectorAll('span[style*="background-color"]').forEach(span => {
+                const parent = span.parentNode;
+                while (span.firstChild) parent.insertBefore(span.firstChild, span);
+                parent.removeChild(span);
+                parent.normalize();
+            });
+            searchResults = 0;
+        }
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') searchText();
+            else if (e.key === 'Escape') clearSearch();
+        });
+    </script>
 </body>
 </html>

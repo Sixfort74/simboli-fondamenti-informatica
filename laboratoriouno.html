@@ -955,6 +955,315 @@ if (permessi & 0b0010) {
         </div>
     </div>
 
+    <!-- ======================= LEZIONE 9 ======================= -->
+<div class="lesson" id="lezione9">
+    <h2>🔤 Lezione 9: Insiemi e Multi-Insiemi in JavaScript</h2>
+
+    <h3>Introduzione</h3>
+    <p>Gli <strong>insiemi</strong> e i <strong>multi-insiemi</strong> sono strutture matematiche fondamentali. In JavaScript non esiste un tipo nativo “set” con operazioni matematiche, quindi impariamo a implementarli usando gli <strong>oggetti</strong> come contenitori.</p>
+
+    <div class="tip"><strong>IDEA BASE:</strong> Usiamo le <em>chiavi</em> di un oggetto come elementi dell’insieme, e il valore 1 come segnaposto.</div>
+
+    <h3>Come rappresentare un insieme in JS</h3>
+    <p>Un insieme è una collezione di elementi <strong>distinti e non ordinati</strong>. Lo rappresentiamo così:</p>
+
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+let A = {};                                  // insieme vuoto
+let frutta = { mela: 1, pera: 1, banana: 1 }; // insieme iniziale
+</pre></div>
+
+    <h3>Operazioni sugli Insiemi</h3>
+
+    <h4>1) Inserimento</h4>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function inserisci(insieme = {}, elemento = "default") {
+    insieme[elemento] = 1;
+}
+
+let A = {};
+inserisci(A, "mela");
+inserisci(A, "pera");
+console.log(A); // { mela:1, pera:1 }
+</pre></div>
+
+    <h4>2) Appartenenza</h4>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function appartiene(insieme, elemento) {
+    return elemento in insieme;
+}
+
+console.log(appartiene(frutta, "mela"));    // true
+console.log(appartiene(frutta, "fragola")); // false
+</pre></div>
+
+    <h4>3) Eliminazione</h4>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function elimina(insieme, elemento) {
+    if (appartiene(insieme, elemento))
+        delete insieme[elemento];
+}
+</pre></div>
+
+    <h4>4) Unione A ∪ B</h4>
+    <p>L’unione contiene tutti gli elementi di A o di B.</p>
+
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function unione(A = {}, B = {}) {
+    let C = {};
+
+    for (let elemento in A)
+        C[elemento] = 1;
+
+    for (let elemento in B)
+        C[elemento] = 1;
+
+    return C;
+}
+
+let A1 = { a:1, b:1 };
+let B1 = { b:1, c:1 };
+console.log(unione(A1, B1)); // { a:1, b:1, c:1 }
+</pre></div>
+
+    <h4>5) Intersezione A ∩ B</h4>
+
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function intersezione(A, B) {
+    let C = {};
+    for (let elemento in A)
+        if (elemento in B)
+            C[elemento] = 1;
+    return C;
+}
+</pre></div>
+
+    <h4>6) Differenza A \ B</h4>
+
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function differenza(A, B) {
+    let C = {};
+    for (let elemento in A)
+        if (!appartiene(B, elemento))
+            C[elemento] = 1;
+    return C;
+}
+</pre></div>
+
+    <h4>7) Sottoinsieme</h4>
+
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function sottoinsieme(A, B) {
+    for (let elemento in A)
+        if (!appartiene(B, elemento))
+            return false;
+    return true;
+}
+</pre></div>
+
+    <h4>8) Insiemi uguali</h4>
+
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function uguali(A, B) {
+    return sottoinsieme(A, B) && sottoinsieme(B, A);
+}
+</pre></div>
+
+    <div class="important"><strong>NOTA:</strong> Poiché l’ordine non conta, due oggetti sono uguali se sono sottoinsieme uno dell’altro.</div>
+
+    <hr>
+
+    <h2>🍎 Multi-Insiemi</h2>
+    <p>Nei <strong>multi-insiemi</strong> gli elementi possono comparire più volte. La chiave è l’elemento, il valore è la <strong>molteplicità</strong>.</p>
+
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+let multi = { mela:3, pera:2, banana:1 };
+</pre></div>
+
+    <h3>Operazioni sui Multi-Insiemi</h3>
+
+    <h4>1) Inserimento con quantità</h4>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function inserisciMulti(M, elemento, quantita = 1) {
+    if (elemento in M)
+        M[elemento] += quantita;
+    else
+        M[elemento] = quantita;
+}
+
+inserisciMulti(multi, "pera", 2);  // aumenta a 4
+inserisciMulti(multi, "uva");      // 1 volta
+</pre></div>
+
+    <h4>2) Rimozione</h4>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function rimuoviMulti(M, elemento, quantita = 1) {
+    if (elemento in M) {
+        M[elemento] -= quantita;
+        if (M[elemento] <= 0)
+            delete M[elemento];
+    }
+}
+</pre></div>
+
+    <h4>3) Unione di Multi-Insiemi</h4>
+    <p>Nella versione “somma delle molteplicità”:</p>
+
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function unioneMulti(A, B) {
+    let C = { ...A };
+    for (let elemento in B) {
+        if (elemento in C)
+            C[elemento] += B[elemento];
+        else
+            C[elemento] = B[elemento];
+    }
+    return C;
+}
+</pre></div>
+
+    <h4>4) Intersezione Multi</h4>
+    <p>Molteplicità = minimo tra A e B.</p>
+
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function intersezioneMulti(A, B) {
+    let C = {};
+    for (let elemento in A)
+        if (elemento in B)
+            C[elemento] = Math.min(A[elemento], B[elemento]);
+    return C;
+}
+</pre></div>
+
+    <h4>5) Differenza Multi</h4>
+    <p>Molteplicità = A[x] − B[x], non sotto zero.</p>
+
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function differenzaMulti(A, B) {
+    let C = {};
+    for (let elemento in A) {
+        let q = A[elemento] - (B[elemento] || 0);
+        if (q > 0) C[elemento] = q;
+    }
+    return C;
+}
+</pre></div>
+
+    <h4>6) Cardinalità di un Multi-Insieme</h4>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function cardinalitaMulti(M) {
+    let tot = 0;
+    for (let elemento in M)
+        tot += M[elemento];
+    return tot;
+}
+</pre></div>
+
+    <h4>7) Conversione array → multiinsieme</h4>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function arrayToMultiinsieme(arr) {
+    let M = {};
+    for (let x of arr)
+        inserisciMulti(M, x);
+    return M;
+}
+
+console.log(arrayToMultiinsieme(["a","b","a","c","a"]));
+// { a:3, b:1, c:1 }
+</pre></div>
+
+    <h4>8) Conversione multiinsieme → array</h4>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function multiinsiemeToArray(M) {
+    let arr = [];
+    for (let elemento in M)
+        for (let i = 0; i < M[elemento]; i++)
+            arr.push(elemento);
+    return arr;
+}
+</pre></div>
+
+    <hr>
+
+    <h2>🧠 Esercizi Tipici d’Esame (L9)</h2>
+
+    <h3>1) Insieme Potenza</h3>
+    <p>Dato A, calcola P(A): l’insieme di tutti i sottoinsiemi.</p>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+// P({1,2}) = {}, {1}, {2}, {1,2}
+function powerSet(A) {
+    let arr = Object.keys(A);
+    let P = [{}];
+    for (let x of arr) {
+        let nuovi = P.map(S => ({ ...S, [x]:1 }));
+        P = [...P, ...nuovi];
+    }
+    return P;
+}
+</pre></div>
+
+    <h3>2) Partizione</h3>
+    <p>Controlla se una lista di insiemi è una partizione valida.</p>
+
+    <h3>3) Prodotto Cartesiano A × B</h3>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function prodottoCartesiano(A, B) {
+    let R = [];
+    for (let a in A)
+        for (let b in B)
+            R.push([a, b]);
+    return R;
+}
+</pre></div>
+
+    <h3>4) Top-k elementi (multiinsiemi)</h3>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function topK(M, k) {
+    return Object.entries(M)
+        .sort((a,b) => b[1] - a[1])
+        .slice(0, k)
+        .map(x => x[0]);
+}
+
+console.log(topK({a:5,b:2,c:8,d:1,e:6}, 3));
+// ["c","e","a"]
+</pre></div>
+
+    <h3>5) Sottoinsieme Multi</h3>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function sottoMulti(A, B) {
+    for (let x in A)
+        if (!B[x] || A[x] > B[x])
+            return false;
+    return true;
+}
+</pre></div>
+
+    <h3>6) Normalizzazione</h3>
+    <p>Trasforma un multi-insieme in distribuzione di probabilità.</p>
+    <div class="example"><pre><button class="copy-btn" onclick="copyCode(this)">📋</button>
+function normalizza(M) {
+    let tot = cardinalitaMulti(M);
+    let R = {};
+    for (let x in M)
+        R[x] = M[x] / tot;
+    return R;
+}
+
+console.log(normalizza({a:2, b:3, c:5}));
+// { a:0.2, b:0.3, c:0.5 }
+</pre></div>
+
+    <!-- Quiz Rapido -->
+    <div class="quiz">
+        <h4>🧠 Quiz Rapido: Cosa rappresenta il valore in un multi-insieme?</h4>
+        <input type="radio" name="qL9" value="a"> a) L’ordine dell’elemento<br>
+        <input type="radio" name="qL9" value="b"> b) La molteplicità<br>
+        <input type="radio" name="qL9" value="c"> c) L’indice dell’array<br>
+        <button onclick="checkQuiz('qL9', 'b', this)">Verifica</button>
+        <div class="quiz-result"></div>
+    </div>
+</div>
+
     <!-- ====================== LEZIONE 10 ====================== -->
     <div class="lesson" id="lezione10">
         <h2>♻️ Lezione 10: Funzioni Avanzate, Parametri e Ricorsione (Parte 1)</h2>

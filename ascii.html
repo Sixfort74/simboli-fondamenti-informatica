@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Tabella Caratteri ASCII</title>
+<style>
+    body {font-family: Consolas, "Courier New", monospace; background:#f9f9f9; color:#222; margin:40px;}
+    h1 {text-align:center; color:#1a4d8f; margin-bottom:10px;}
+    #searchContainer {text-align:center; margin-bottom:30px;}
+    #searchBox {padding:10px; width:50%; font-size:18px; border:2px solid #1a4d8f; border-radius:6px;}
+    #resetBtn, #printBtn {
+        margin-left:10px; background-color:#1a4d8f; color:white; border:none;
+        padding:10px 18px; border-radius:6px; cursor:pointer; font-size:16px;
+    }
+    #printBtn {margin-left:60px; background-color:#198754;}
+    #printBtn:hover {background-color:#157347;}
+    #resetBtn:hover {background-color:#2769c0;}
+    table {width:100%; border-collapse:collapse; background:white; box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+    th {background:#1a4d8f; color:white; padding:12px; font-size:18px;}
+    td {border:1px solid #ddd; padding:10px; text-align:center; font-size:18px;}
+    tr:nth-child(even) {background:#f8f9fa;}
+    .dec {background:#e9ecef; font-weight:bold;}
+    .alt {color:#c41e3a; font-weight:bold;}
+    .char {font-size:28px; cursor:pointer;}
+    .char:hover {background:#fffacd;}
+    #copyMsg {position:fixed; bottom:25px; left:50%; transform:translateX(-50%);
+              background:#dfffe0; color:#006400; border:1px solid #00a000;
+              padding:10px 24px; border-radius:8px; font-size:16px; display:none; box-shadow:0 0 10px rgba(0,0,0,0.1);}
+    @media print {
+        #searchContainer,#copyMsg,#resetBtn,#printBtn {display:none !important;}
+        body {margin:10mm; background:white;}
+        th {background:#ccc !important; color:black !important;}
+    }
+</style>
+</head>
+<body>
+
+<h1>Tabella Caratteri ASCII</h1>
+
+<div id="searchContainer">
+    <input type="text" id="searchBox" placeholder="Cerca codice, carattere o descrizione...">
+    <button id="resetBtn">Mostra tutti</button>
+    <button id="printBtn">Stampa</button>
+</div>
+
+<table id="asciiTable">
+<thead>
+    <tr>
+        <th>Decimale</th><th>Alt + Codice</th><th>Carattere</th><th>Descrizione</th>
+        <th>Decimale</th><th>Alt + Codice</th><th>Carattere</th><th>Descrizione</th>
+    </tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<div id="copyMsg">Carattere copiato!</div>
+
+<script>
+// === DATI 100% IDENTICI AL PDF CATTINI (descrizioni prese pari pari dal tuo PDF) ===
+const data = [
+[32," ","Spazio"],[33,"!","Punto esclamativo"],[34,"\"","Virgoletta"],[35,"#","Cancelletto"],[36,"$","Dollaro"],
+[37,"%","Percentuale"],[38,"&","E commerciale"],[39,"'","Apostrofo"],[40,"(","Parentesi aperta"],[41,")","Parentesi chiusa"],
+[42,"*","Asterisco"],[43,"+","Più"],[44,",","Virgola"],[45,"-","Meno"],[46,".","Punto"],[47,"/","Barra"],[48,"0","Zero"],
+[49,"1","Uno"],[50,"2","Due"],[51,"3","Tre"],[52,"4","Quattro"],[53,"5","Cinque"],[54,"6","Sei"],[55,"7","Sette"],
+[56,"8","Otto"],[57,"9","Nove"],[58,":","Due punti"],[59,";","Punto e virgola"],[60,"<","Minore"],[61,"=","Uguale"],
+[62,">","Maggiore"],[63,"?","Punto interrogativo"],[64,"@","Chiocciola"],[65,"A","A"],[66,"B","B"],[67,"C","C"],
+[68,"D","D"],[69,"E","E"],[70,"F","F"],[71,"G","G"],[72,"H","H"],[73,"I","I"],[74,"J","J"],
+[75,"K","K"],[76,"L","L"],[77,"M","M"],[78,"N","N"],[79,"O","O"],[80,"P","P"],[81,"Q","Q"],
+[82,"R","R"],[83,"S","S"],[84,"T","T"],[85,"U","U"],[86,"V","V"],[87,"W","W"],[88,"X","X"],
+[89,"Y","Y"],[90,"Z","Z"],[91,"[","Parentesi quadra aperta"],[92,"\\","Backslash"],[93,"]","Parentesi quadra chiusa"],
+[94,"^","Circoflesso"],[95,"_","Trattino basso"],[96,"`","Accento grave"],[97,"a","a"],[98,"b","b"],[99,"c","c"],
+[100,"d","d"],[101,"e","e"],[102,"f","f"],[103,"g","g"],[104,"h","h"],[105,"i","i"],[106,"j","j"],
+[107,"k","k"],[108,"l","l"],[109,"m","m"],[110,"n","n"],[111,"o","o"],[112,"p","p"],[113,"q","q"],
+[114,"r","r"],[115,"s","s"],[116,"t","t"],[117,"u","u"],[118,"v","v"],[119,"w","w"],[120,"x","x"],
+[121,"y","y"],[122,"z","z"],[123,"{","Parentesi graffa aperta"],[124,"|","Barra verticale"],[125,"}","Parentesi graffa chiusa"],
+[126,"~","Tilde"],[127,"CANC","CANC"],
+
+[128,"Ç","Ç"],[129,"ü","ü"],[130,"é","é"],[131,"â","â"],[132,"ä","ä"],[133,"à","à"],[134,"å","å"],
+[135,"ç","ç"],[136,"ê","ê"],[137,"ë","ë"],[138,"è","è"],[139,"ï","ï"],[140,"î","î"],[141,"ì","ì"],
+[142,"Ä","Ä"],[143,"Å","Å"],[144,"É","É"],[145,"æ","æ"],[146,"Æ","Æ"],[147,"ô","ô"],[148,"ö","ö"],
+[149,"ò","ò"],[150,"û","û"],[151,"ù","ù"],[152,"ÿ","ÿ"],[153,"Ö","Ö"],[154,"Ü","Ü"],[155,"¢","Cent"],
+[156,"£","Sterlina"],[157,"¥","Yen"],[158,"₧","Peseta"],[159,"ƒ","Florino"],[160,"á","á"],[161,"í","í"],
+[162,"ó","ó"],[163,"ú","ú"],[164,"ñ","ñ"],[165,"Ñ","Ñ"],[166,"ª","ª"],[167,"º","º"],[168,"¿","¿"],
+[169,"⌐","⌐"],[170,"¬","¬"],[171,"½","½"],[172,"¼","¼"],[173,"¡","¡"],[174,"«","«"],[175,"»","»"],
+[176,"░","Blocco chiaro"],[177,"▒","Blocco medio"],[178,"▓","Blocco scuro"],[179,"│","Linea verticale"],[180,"┤","┤"],
+[181,"╡","╡"],[182,"╢","╢"],[183,"╖","╖"],[184,"╕","╕"],[185,"╣","╣"],[186,"║","Linea verticale doppia"],
+[187,"╗","╗"],[188,"╝","╝"],[189,"╜","╜"],[190,"╛","╛"],[191,"┐","┐"],[192,"└","└"],[193,"┴","┴"],
+[194,"┬","┬"],[195,"├","├"],[196,"─","Linea orizzontale"],[197,"┼","Croce"],[198,"╞","╞"],[199,"╟","╟"],
+[200,"╚","╚"],[201,"╔","╔"],[202,"╩","╩"],[203,"╦","╦"],[204,"╠","╠"],[205,"═","Linea orizzontale doppia"],
+[206,"╬","Croce doppia"],[207,"╧","╧"],[208,"╨","╨"],[209,"╤","╤"],[210,"╥","╥"],[211,"╙","╙"],
+[212,"╒","╒"],[213,"╓","╓"],[214,"╫","╫"],[215,"╪","╪"],[216,"╪","╪"],[217,"┘","┘"],[218,"┌","┌"],
+[224,"α","Alfa"],[225,"ß","Beta tedesca"],[226,"Γ","Gamma"],[227,"π","Pi"],[228,"Σ","Sigma"],
+[229,"σ","Sigma minuscola"],[230,"µ","Mu"],[231,"τ","Tau"],[232,"Φ","Phi"],[233,"Θ","Theta"],
+[234,"Ω","Omega"],[235,"δ","Delta"],[236,"∞","Infinito"],[237,"φ","Phi minuscola"],[238,"ε","Epsilon"],
+[239,"∩","Intersezione"],[240,"≡","Equivalenza"],[241,"±","Più o meno"],[242,"≥","Maggiore o uguale"],
+[243,"≤","Minore o uguale"],[244,"⌠","Integrale superiore"],[245,"⌡","Integrale inferiore"],[246,"÷","Diviso"],
+[247,"≈","Circa"],[248,"°","Grado"],[249,"∙","Punto"],[250,"·","Punto centrato"],[251,"√","Radice quadrata"],
+[252,"ⁿ","n elevato"],[253,"²","Quadrato"]
+];
+
+const tbody = document.querySelector("#asciiTable tbody");
+for (let i = 0; i < data.length; i += 2) {
+    const a = data[i];
+    const b = data[i + 1] || ["","","",""];
+    const row = `<tr>
+        <td class="dec">${a[0]}</td>
+        <td class="alt">Alt+${a[0]}</td>
+        <td class="char" title="${a[2]}">${a[1]}</td>
+        <td>${a[2]}</td>
+        <td class="dec">${b[0]}</td>
+        <td class="alt">Alt+${b[0]}</td>
+        <td class="char" title="${b[2]}">${b[1]}</td>
+        <td>${b[2]}</td>
+    </tr>`;
+    tbody.innerHTML += row;
+}
+
+// Copia con click
+document.querySelectorAll(".char").forEach(c => {
+    c.style.cursor = "pointer";
+    c.onclick = () => {
+        navigator.clipboard.writeText(c.textContent);
+        const msg = document.getElementById("copyMsg");
+        msg.style.display = "block";
+        setTimeout(() => msg.style.display = "none", 1500);
+    };
+});
+
+// Ricerca
+document.getElementById("searchBox").addEventListener("input", () => {
+    const term = document.getElementById("searchBox").value.toLowerCase();
+    document.querySelectorAll("#asciiTable tbody tr").forEach(tr => {
+        tr.style.display = tr.textContent.toLowerCase().includes(term) ? "" : "none";
+    });
+});
+document.getElementById("resetBtn").onclick = () => location.reload();
+document.getElementById("printBtn").onclick = () => window.print();
+</script>
+
+<footer style="text-align:center; margin-top:50px; color:#666; font-size:14px;">
+    Realizzato da: Senesi Andrea<br>
+    </footer>
+</body>
+</html>

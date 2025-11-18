@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VS Code Cheat Sheet – JavaScript & Node.js</title>
+  <style>
+    @page { margin: 1cm; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+      color: #333;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    h1 { text-align: center; color: #007acc; }
+    h2 { color: #007acc; border-bottom: 2px solid #007acc; padding-bottom: 5px; }
+    kbd {
+      background: #f1f1f1;
+      padding: 2px 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 0.95em;
+    }
+    ul { padding-left: 20px; }
+    li { margin: 8px 0; }
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 12px 24px;
+      background: #007acc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .print-btn:hover { background: #005a9e; }
+    @media print {
+      .print-btn { display: none; }
+      body { margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Stampa / Salva come PDF</button>
+
+<h1>📑 Cheat Sheet VS Code – JavaScript & Node.js</h1>
+
+<h2>🚀 Esecuzione e Debug</h2>
+<ul>
+  <li><kbd>F5</kbd> → Avvia con Debug<br><small>Esegue il programma e attiva il debugger (breakpoints, passo-passo)</small></li>
+  <li><kbd>Ctrl + F5</kbd> → Avvia senza Debug<br><small>Test veloce senza analisi</small></li>
+  <li><kbd>Ctrl + Shift + D</kbd> → Apri pannello Esegui e Debug<br><small>Configurazioni Node.js, browser, ecc.</small></li>
+  <li><kbd>F9</kbd> → Aggiungi/Togli breakpoint</li>
+  <li><kbd>F10</kbd> → Step Over<br><small>Salta sopra la funzione senza entrarci</small></li>
+  <li><kbd>F11</kbd> → Step Into<br><small>Entra dentro la funzione</small></li>
+  <li><kbd>Shift + F11</kbd> → Step Out<br><small>Esce dalla funzione corrente</small></li>
+</ul>
+
+<h2>⚙️ Terminale e Gestione File</h2>
+<ul>
+  <li><kbd>Ctrl + ù</kbd> → Apri terminale integrato<br><small>Per <code>node file.js</code>, <code>npm</code>, ecc.</small></li>
+  <li><kbd>Ctrl + N</kbd> → Nuovo file</li>
+  <li><kbd>Ctrl + O</kbd> → Apri file</li>
+  <li><kbd>Ctrl + S</kbd> → Salva file corrente</li>
+  <li><kbd>Ctrl + K S</kbd> → Salva tutti i file</li>
+  <li><kbd>Ctrl + W</kbd> → Chiudi scheda corrente</li>
+</ul>
+
+<h2>✏️ Editing veloce</h2>
+<ul>
+  <li><kbd>Ctrl + C</kbd> → Copia riga corrente (senza selezione)</li>
+  <li><kbd>Ctrl + X</kbd> → Taglia riga corrente (senza selezione)</li>
+  <li><kbd>Shift + Alt + ↓/↑</kbd> → Duplica riga sotto/sopra</li>
+  <li><kbd>Alt + ↑/↓</kbd> → Sposta riga su/giù</li>
+  <li><kbd>Ctrl + /</kbd> → Commenta/decommenta riga (//)</li>
+  <li><kbd>Shift + Alt + F</kbd> → Formatta documento</li>
+</ul>
+
+<h2>🔍 Navigazione e Ricerca</h2>
+<ul>
+  <li><kbd>Ctrl + F</kbd> → Cerca nel file</li>
+  <li><kbd>Ctrl + H</kbd> → Trova e sostituisci</li>
+  <li><kbd>Ctrl + G</kbd> → Vai a riga specifica</li>
+  <li><kbd>F12</kbd> → Vai a definizione (funzione/variabile)</li>
+  <li><kbd>Ctrl + Shift + L</kbd> → Seleziona tutte le occorrenze</li>
+</ul>
+
+<p style="text-align:center; margin-top:50px; color:#666;">
+  💡 Realizzato da: Senesi Andrea
+</p>
+
+</body>
+</html>

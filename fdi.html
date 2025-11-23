@@ -1,296 +1,186 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>Fondamenti di Informatica – Simboli logici e insiemistici</title>
-<style>
-    body {
-        font-family: Consolas, monospace;
-        background-color: #f9f9f9;
-        color: #222;
-        margin: 40px;
-    }
-
-    h1 {
-        text-align: center;
-        color: #1a4d8f;
-        margin-bottom: 10px;
-    }
-
-    #searchContainer {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    #searchBox {
-        padding: 10px;
-        width: 50%;
-        font-size: 18px;
-        border: 2px solid #1a4d8f;
-        border-radius: 6px;
-    }
-
-    #resetBtn {
-        margin-left: 10px;
-        background-color: #1a4d8f;
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    #resetBtn:hover {
-        background-color: #2769c0;
-    }
-
-    #printBtn {
-        margin-left: 60px; /* distanza ampia da “Mostra tutti” */
-        background-color: #198754;
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    #printBtn:hover {
-        background-color: #157347;
-    }
-
-    h2 {
-        background-color: #1a4d8f;
-        color: white;
-        padding: 8px;
-        border-radius: 6px;
-        font-size: 18px;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 25px;
-    }
-
-    th, td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: center;
-        font-size: 18px;
-    }
-
-    th {
-        background-color: #eee;
-    }
-
-    button.copy-btn {
-        background-color: #1a4d8f;
-        color: white;
-        border: none;
-        padding: 5px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-    }
-
-    button.copy-btn:hover {
-        background-color: #2769c0;
-    }
-
-    .symbol {
-        font-size: 24px;
-    }
-
-    #copyMsg {
-        position: fixed;
-        bottom: 25px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #dfffe0;
-        color: #006400;
-        border: 1px solid #00a000;
-        padding: 8px 18px;
-        border-radius: 8px;
-        font-size: 16px;
-        display: none;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Modalità stampa */
-    @media print {
-        #searchContainer,
-        .copy-btn,
-        #resetBtn,
-        #printBtn,
-        #copyMsg {
-            display: none !important;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ripasso Teoria degli Insiemi - Informatica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px auto;
+            max-width: 900px;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
         }
-
         h1 {
             text-align: center;
-            color: black;
-            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
         }
-
         h2 {
-            background-color: #eee !important;
-            color: black !important;
+            color: #2980b9;
+            border-left: 5px solid #3498db;
+            padding-left: 10px;
+            margin-top: 30px;
         }
-
-        body {
-            margin: 15mm;
-            background-color: white;
-            color: black;
+        h3 {
+            color: #16a085;
+            margin-top: 20px;
         }
-
-        table, th, td {
-            border: 1px solid #555;
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
         }
-    }
-</style>
+        li {
+            margin: 8px 0;
+        }
+        code {
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 12px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .important {
+            background-color: #d4edda;
+            border-left: 6px solid #28a745;
+            padding: 12px;
+            margin: 20px 0;
+        }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Fondamenti di Informatica – Simboli logici e insiemistici</h1>
+<h1>Teoria degli Insiemi - Ripasso Veloce per l'Esame di Informatica</h1>
 
-<div id="searchContainer">
-    <input type="text" id="searchBox" placeholder="🔍 Cerca per simbolo, nome o combinazione...">
-    <button id="resetBtn">Mostra tutti</button>
-    <button id="printBtn">🖨️ Stampa</button>
+<h2>1. DEFINIZIONI FONDAMENTALI</h2>
+<p><strong>Cos'è un Insieme?</strong> Un insieme è una collezione di oggetti distinti. In informatica è come un "sacchetto" o un contenitore logico.</p>
+<ul>
+    <li>L'ordine non conta: {1, 2, 3} è esattamente uguale a {3, 1, 2}.</li>
+    <li>Le ripetizioni non contano: {1, 1, 1} è uguale a {1}. Se scrivi un elemento due volte, è ridondante.</li>
+</ul>
+
+<h3>Rappresentazione</h3>
+<ul>
+    <li><strong>Estensionale (per elenco):</strong> Scrivi tutti gli elementi tra parentesi graffe.<br>
+        Esempio: A = {1, 3, 5, 7}</li>
+    <li><strong>Intensionale (per proprietà):</strong> Descrivi la regola che gli elementi devono rispettare.<br>
+        Esempio: B = {x ∈ ℕ | x è dispari e x &lt; 8}</li>
+</ul>
+
+<h2>2. I SIMBOLI CHIAVE (E LE TRAPPOLE)</h2>
+<div class="important">
+    Questa è la parte più critica dell'esame scritto.
 </div>
 
-<!-- INSIEMI -->
-<h2>Insiemi</h2>
-<table class="symbol-table">
-<tr><th>Combinazione</th><th>Simbolo</th><th>Significato</th><th>Copia</th></tr>
-<tr><td>Ctrl+Alt+U</td><td class="symbol">∪</td><td>Unione</td><td><button class="copy-btn" onclick="copySymbol('∪')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+I</td><td class="symbol">∩</td><td>Intersezione</td><td><button class="copy-btn" onclick="copySymbol('∩')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+S</td><td class="symbol">⊆</td><td>Sottoinsieme</td><td><button class="copy-btn" onclick="copySymbol('⊆')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+A</td><td class="symbol">⊂</td><td>Sottoinsieme proprio</td><td><button class="copy-btn" onclick="copySymbol('⊂')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+E</td><td class="symbol">∈</td><td>Appartiene</td><td><button class="copy-btn" onclick="copySymbol('∈')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+È</td><td class="symbol">∉</td><td>Non appartiene</td><td><button class="copy-btn" onclick="copySymbol('∉')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+0</td><td class="symbol">⊇</td><td>Sovrainsieme</td><td><button class="copy-btn" onclick="copySymbol('⊇')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+-</td><td class="symbol">⊃</td><td>Sovrainsieme proprio</td><td><button class="copy-btn" onclick="copySymbol('⊃')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+,</td><td class="symbol">⊄</td><td>Non sottoinsieme</td><td><button class="copy-btn" onclick="copySymbol('⊄')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+.</td><td class="symbol">⊅</td><td>Non sovrainsieme</td><td><button class="copy-btn" onclick="copySymbol('⊅')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+M</td><td class="symbol">∖</td><td>Differenza insiemistica</td><td><button class="copy-btn" onclick="copySymbol('∖')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+V</td><td class="symbol">∅</td><td>Insieme vuoto</td><td><button class="copy-btn" onclick="copySymbol('∅')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+J</td><td class="symbol">∪̇</td><td>Unione disgiunta</td><td><button class="copy-btn" onclick="copySymbol('∪̇')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+G</td><td class="symbol">{}</td><td>Graffe vuote</td><td><button class="copy-btn" onclick="copySymbol('{}')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+H</td><td class="symbol">{</td><td>Graffa aperta</td><td><button class="copy-btn" onclick="copySymbol('{')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+R</td><td class="symbol">}</td><td>Graffa chiusa</td><td><button class="copy-btn" onclick="copySymbol('}')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+B</td><td class="symbol">[]</td><td>Parentesi quadre</td><td><button class="copy-btn" onclick="copySymbol('[]')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+W</td><td class="symbol">→</td><td>Freccia destra</td><td><button class="copy-btn" onclick="copySymbol('→')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+N</td><td class="symbol">↔</td><td>Freccia doppia</td><td><button class="copy-btn" onclick="copySymbol('↔')">Copia</button></td></tr>
+<h3>APPARTIENE (∈)</h3>
+<ul>
+    <li>Significato: "È un elemento di..."</li>
+    <li>Il Test Visivo: Per dire che "x ∈ A" è VERO, devi vedere l'oggetto "x" esattamente così com'è (nudo e crudo) dentro la lista degli elementi di A.</li>
+    <li>Esempio: Se A = { 1, {2} }:<br>
+        → 1 ∈ A (VERO)<br>
+        → {2} ∈ A (VERO)<br>
+        → 2 ∈ A (FALSO, il 2 è chiuso nel sacchetto)</li>
+</ul>
+
+<h3>INCLUSO / SOTTOINSIEME (⊆)</h3>
+<ul>
+    <li>Significato: "Tutti i miei elementi sono anche tuoi"</li>
+    <li>La Regola: A sinistra del simbolo di inclusione ci deve essere SEMPRE un insieme.</li>
+    <li>Il Test dello Zaino: Per {x} ⊆ A → apri lo zaino, tira fuori x, controlla se x è in A.</li>
+</ul>
+
+<h3>INSIEME VUOTO (∅)</h3>
+<ul>
+    <li>È l'insieme che non contiene nulla: ∅ oppure { }</li>
+    <li><strong>Regola Aurea:</strong> ∅ ⊆ A è sempre Vero (per ogni A, incluso se stesso)</li>
+    <li>Attenzione: ∅ ≠ 0</li>
+</ul>
+
+<h2>3. OPERAZIONI SUGLI INSIEMI</h2>
+<p>Dati A = {1, 2}, B = {2, 3}, U = {1, 2, 3, 4}</p>
+
+<table border="1" style="width:100%; border-collapse: collapse; margin: 20px 0;">
+    <tr><th>Operazione</th><th>Simbolo</th><th>Concetto</th><th>Esempio</th></tr>
+    <tr><td>Unione</td><td>∪</td><td>Tutti gli elementi in A o in B</td><td>A ∪ B = {1, 2, 3}</td></tr>
+    <tr><td>Intersezione</td><td>∩</td><td>Solo gli elementi in entrambi</td><td>A ∩ B = {2}</td></tr>
+    <tr><td>Differenza</td><td>\ o -</td><td>Togli da A gli elementi che sono anche in B</td><td>A \ B = {1}</td></tr>
+    <tr><td>Complemento</td><td>A<sup>c</sup></td><td>Tutto nell'universo tranne A</td><td>A<sup>c</sup> = {3, 4}</td></tr>
+    <tr><td>Prodotto Cartesiano</td><td>×</td><td>Tutte le coppie ordinate possibili</td><td>A × B = {(1,2),(1,3),(2,2),(2,3)}</td></tr>
 </table>
 
-<!-- LOGICA -->
-<h2>Logica</h2>
-<table class="symbol-table">
-<tr><th>Combinazione</th><th>Simbolo</th><th>Significato</th><th>Copia</th></tr>
-<tr><td>Ctrl+Alt+9</td><td class="symbol">¬</td><td>Negazione</td><td><button class="copy-btn" onclick="copySymbol('¬')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+Y</td><td class="symbol">∧</td><td>AND logico</td><td><button class="copy-btn" onclick="copySymbol('∧')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+O</td><td class="symbol">∨</td><td>OR logico</td><td><button class="copy-btn" onclick="copySymbol('∨')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+X</td><td class="symbol">⊕</td><td>XOR</td><td><button class="copy-btn" onclick="copySymbol('⊕')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+P</td><td class="symbol">⇒</td><td>Implica</td><td><button class="copy-btn" onclick="copySymbol('⇒')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+K</td><td class="symbol">⇔</td><td>Se e solo se</td><td><button class="copy-btn" onclick="copySymbol('⇔')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+T</td><td class="symbol">⊤</td><td>Vero</td><td><button class="copy-btn" onclick="copySymbol('⊤')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+F</td><td class="symbol">⊥</td><td>Falso</td><td><button class="copy-btn" onclick="copySymbol('⊥')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+Z</td><td class="symbol">±</td><td>Più o meno</td><td><button class="copy-btn" onclick="copySymbol('±')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+Ò</td><td class="symbol">Ø</td><td>Zero sbarrato</td><td><button class="copy-btn" onclick="copySymbol('Ø')">Copia</button></td></tr>
-</table>
+<h2>4. INSIEME DELLE PARTI (P o 𝒫)</h2>
+<div class="warning">
+    Argomento con più errori agli scritti!
+</div>
+<ul>
+    <li>Contiene tutti i possibili sottoinsiemi di un insieme</li>
+    <li>Cardinalità: se |A| = n → |𝒫(A)| = 2<sup>n</sup></li>
+    <li>Esempi:
+        <ul>
+            <li>n=0 → 1 elemento: { ∅ }</li>
+            <li>n=1 → 2 elementi</li>
+            <li>n=2 → 4 elementi</li>
+            <li>n=3 → 8 elementi</li>
+        </ul>
+    </li>
+    <li><strong>Non dimenticare mai:</strong> ∅ e l'insieme originale devono esserci!</li>
+</ul>
+<p><strong>Esempio:</strong> K = {a, b}<br>
+𝒫(K) = { ∅, {a}, {b}, {a, b} }</p>
 
-<!-- QUANTIFICATORI -->
-<h2>Quantificatori</h2>
-<table class="symbol-table">
-<tr><th>Combinazione</th><th>Simbolo</th><th>Significato</th><th>Copia</th></tr>
-<tr><td>Ctrl+Alt+Q</td><td class="symbol">∀</td><td>Per ogni</td><td><button class="copy-btn" onclick="copySymbol('∀')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+Ù</td><td class="symbol">∃</td><td>Esiste</td><td><button class="copy-btn" onclick="copySymbol('∃')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+À</td><td class="symbol">∄</td><td>Non esiste</td><td><button class="copy-btn" onclick="copySymbol('∄')">Copia</button></td></tr>
-</table>
+<h2>5. LE PARTIZIONI</h2>
+<p>Una partizione è una suddivisione in sottoinsiemi che rispettano le <strong>3 Regole Sacre</strong>:</p>
+<ol>
+    <li><strong>Non Vuoto:</strong> nessun blocco può essere ∅</li>
+    <li><strong>Copertura Totale:</strong> l’unione di tutti i blocchi deve dare esattamente l’insieme originale</li>
+    <li><strong>Disgiunzione:</strong> intersezione tra blocchi diversi = ∅ (niente elementi duplicati)</li>
+</ol>
 
-<!-- RELAZIONI -->
-<h2>Relazioni e Confronti</h2>
-<table class="symbol-table">
-<tr><th>Combinazione</th><th>Simbolo</th><th>Significato</th><th>Copia</th></tr>
-<tr><td>Ctrl+Alt+D</td><td class="symbol">≠</td><td>Diverso</td><td><button class="copy-btn" onclick="copySymbol('≠')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+J</td><td class="symbol">≥</td><td>Maggiore o uguale</td><td><button class="copy-btn" onclick="copySymbol('≥')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+L</td><td class="symbol">≤</td><td>Minore o uguale</td><td><button class="copy-btn" onclick="copySymbol('≤')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+1</td><td class="symbol">∑</td><td>Sommatoria</td><td><button class="copy-btn" onclick="copySymbol('∑')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+2</td><td class="symbol">√</td><td>Radice quadrata</td><td><button class="copy-btn" onclick="copySymbol('√')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+3</td><td class="symbol">∞</td><td>Infinito</td><td><button class="copy-btn" onclick="copySymbol('∞')">Copia</button></td></tr>
-</table>
+<h2>6. I TUOI "NEMICI GIURATI" (Errori più comuni)</h2>
+<div class="warning">
+    <ol>
+        <li><strong>Il "Vizio dello Zero"</strong><br>
+            Scrivere {0} invece di ∅ → SBAGLIATO<br>
+            Corretto: ∅ o { }</li>
+        <li><strong>Dimenticanza del Vuoto</strong><br>
+            In 𝒫(A) scordarsi di scrivere ∅</li>
+        <li><strong>Confusione Sottoinsieme</strong><br>
+            Scrivere "1 ⊆ A" → SBAGLIATO<br>
+            Corretto: {1} ⊆ A</li>
+        <li><strong>Doppio Gioco</strong><br>
+            A = {a, {a}} → {a} ∈ A è VERO (vedi il sacchetto esattamente così)</li>
+    </ol>
+</div>
 
-<!-- INSIEMI NUMERICI -->
-<h2>Insiemi Numerici</h2>
-<table class="symbol-table">
-<tr><th>Combinazione</th><th>Simbolo</th><th>Significato</th><th>Copia</th></tr>
-<tr><td>Ctrl+Alt+4</td><td class="symbol">ℕ</td><td>Numeri naturali</td><td><button class="copy-btn" onclick="copySymbol('ℕ')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+5</td><td class="symbol">ℤ</td><td>Numeri interi</td><td><button class="copy-btn" onclick="copySymbol('ℤ')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+6</td><td class="symbol">ℚ</td><td>Numeri razionali</td><td><button class="copy-btn" onclick="copySymbol('ℚ')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+7</td><td class="symbol">ℝ</td><td>Numeri reali</td><td><button class="copy-btn" onclick="copySymbol('ℝ')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+8</td><td class="symbol">ℙ</td><td>Numeri primi</td><td><button class="copy-btn" onclick="copySymbol('ℙ')">Copia</button></td></tr>
-</table>
-
-<!-- SIMBOLI AVANZATI -->
-<h2>Simboli Avanzati (Facoltativi)</h2>
-<table class="symbol-table">
-<tr><th>Combinazione</th><th>Simbolo</th><th>Significato</th><th>Copia</th></tr>
-<tr><td>Ctrl+Alt+*</td><td class="symbol">⊗</td><td>Prodotto cartesiano / tensoriale</td><td><button class="copy-btn" onclick="copySymbol('⊗')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+`</td><td class="symbol">`</td><td>Backtick (accento grave)</td><td><button class="copy-btn" onclick="copySymbol('`')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+/</td><td class="symbol">⊙</td><td>Prodotto logico / scalare</td><td><button class="copy-btn" onclick="copySymbol('⊙')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+[</td><td class="symbol">⊎</td><td>Unione disgiunta (alternativa a ∪̇)</td><td><button class="copy-btn" onclick="copySymbol('⊎')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+]</td><td class="symbol">⋂</td><td>Intersezione multipla</td><td><button class="copy-btn" onclick="copySymbol('⋂')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+\\</td><td class="symbol">⋃</td><td>Unione multipla</td><td><button class="copy-btn" onclick="copySymbol('⋃')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+=</td><td class="symbol">≡</td><td>Identico / congruente</td><td><button class="copy-btn" onclick="copySymbol('≡')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+~</td><td class="symbol">≈</td><td>Circa uguale</td><td><button class="copy-btn" onclick="copySymbol('≈')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+p</td><td class="symbol">∝</td><td>Proporzionale a</td><td><button class="copy-btn" onclick="copySymbol('∝')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+→</td><td class="symbol">↦</td><td>Funzione da (mappa in)</td><td><button class="copy-btn" onclick="copySymbol('↦')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+T</td><td class="symbol">⊢</td><td>Deriva (deduzione logica)</td><td><button class="copy-btn" onclick="copySymbol('⊢')">Copia</button></td></tr>
-<tr><td>Ctrl+Alt+Y</td><td class="symbol">⊨</td><td>Soddisfa (modello logico)</td><td><button class="copy-btn" onclick="copySymbol('⊨')">Copia</button></td></tr>
-</table>
-
-<!-- Messaggio di conferma copia -->
-<div id="copyMsg">✅ Simbolo copiato!</div>
-
-<script>
-function copySymbol(symbol) {
-    navigator.clipboard.writeText(symbol).then(() => {
-        const msg = document.getElementById("copyMsg");
-        msg.style.display = "block";
-        setTimeout(() => msg.style.display = "none", 1500);
-    });
-}
-
-// 🔍 Ricerca globale
-const searchBox = document.getElementById("searchBox");
-const resetBtn = document.getElementById("resetBtn");
-
-searchBox.addEventListener("input", () => {
-    const search = searchBox.value.toLowerCase();
-    const rows = document.querySelectorAll("table.symbol-table tr");
-    rows.forEach((row, index) => {
-        if (index === 0) return;
-        const text = row.innerText.toLowerCase();
-        row.style.display = text.includes(search) ? "" : "none";
-    });
-});
-
-// 🔁 Pulsante "Mostra tutti"
-resetBtn.addEventListener("click", () => {
-    searchBox.value = "";
-    const rows = document.querySelectorAll("table.symbol-table tr");
-    rows.forEach(row => row.style.display = "");
-});
-
-// 🖨️ Pulsante di stampa
-document.getElementById("printBtn").addEventListener("click", () => {
-    window.print();
-});
-</script>
+<h2>7. STRATEGIA DI STUDIO "SALVA-BORSA"</h2>
+<ol>
+    <li><strong>Priorità Pratica:</strong> non imparare a memoria, risolvi esercizi</li>
+    <li><strong>Simulazione Continua:</strong> rifai tutto a mano senza guardare</li>
+    <li><strong>Mantra della Notazione:</strong> prima di consegnare controlla:
+        <ul>
+            <li>Insieme → graffe { }</li>
+            <li>Cardinalità → solo numero</li>
+            <li>Coppia → tonde ( )</li>
+        </ul>
+    </li>
+</ol>
 
 </body>
 </html>
-

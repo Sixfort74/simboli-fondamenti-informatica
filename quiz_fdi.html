@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>100 Quiz Teoria degli Insiemi – Fondamenti dell'Informatica</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {font-family: Arial, sans-serif; max-width: 960px; margin: 20px auto; background:#f8f9fc; color:#333; padding:10px; line-height:1.6;}
+    h1 {text-align:center; color:#2c3e50;}
+    .quiz {background:white; border-radius:12px; padding:18px; margin:20px 0; box-shadow:0 4px 15px rgba(0,0,0,0.1); border-left:5px solid #3498db;}
+    .question {font-weight:bold; font-size:1.15em; margin-bottom:12px; color:#2c3e50;}
+    label {display:block; margin:8px 0; padding:10px; background:#ecf0f1; border-radius:8px; cursor:pointer;}
+    label:hover {background:#dbeafe;}
+    input[type=radio] {margin-right:10px; transform:scale(1.2);}
+    button {background:#27ae60; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-size:1em;}
+    button:hover {background:#219653;}
+    button:disabled {background:#95a5a6;}
+    .result {margin-top:12px; padding:12px; border-radius:8px; font-weight:bold; display:none;}
+    .correct {background:#d4edda; border:1px solid #c3e6cb; color:#155724;}
+    .wrong {background:#f8d7da; border:1px solid #f5c6cb; color:#721c24;}
+    .score {text-align:center; font-size:1.5em; padding:15px; background:#3498db; color:white; border-radius:12px; margin:20px 0;}
+    .final {text-align:center; font-size:2em; margin:40px 0; padding:20px; background:#2c3e50; color:white; border-radius:15px; display:none;}
+    .explanation {margin-top:8px; font-style:italic; background:#f8f9fa; padding:10px; border-left:4px solid #3498db;}
+</style>
+</head>
+<body>
+
+<h1>100 Quiz Fondamenti dell'informatica - INSIEMI<br><small></small></h1>
+<div class="score" id="score">Punteggio: 0 / 0</div>
+<div id="quizzes"></div>
+<div class="final" id="finalResult"></div>
+
+<script>
+// 100 DOMANDE – NUMERI MESSI SOLO DAL CODICE (niente duplicati!)
+const questions = [
+{ q: "Qual è la scrittura corretta dell'insieme vuoto?", o:["{0}", "∅ oppure { }", "0", "[]"], a:"1", e:"Mai {0}! L'insieme vuoto è ∅ oppure semplicemente { }."},
+{ q: "A = {1, {2}}. È vero che 2 ∈ A?", o:["Sì", "No"], a:"1", e:"No! Il 2 è dentro il sacchetto {2}."},
+{ q: "A = {1, {2}}. È vero che {2} ∈ A?", o:["Sì", "No"], a:"0", e:"Sì! Vedo esattamente il sacchetto {2}."},
+{ q: "Quanti elementi ha 𝒫(∅)?", o:["0", "1", "2", "4"], a:"1", e:"𝒫(∅) = {∅} → 1 elemento."},
+{ q: "∅ ⊆ A è sempre vero?", o:["Sì", "No"], a:"0", e:"Sì! Regola aurea."},
+{ q: "Una partizione può contenere ∅ come blocco?", o:["Sì", "No"], a:"1", e:"No! Nessun blocco vuoto."},
+{ q: "Se |A| = 4, quanti elementi ha 𝒫(A)?", o:["8", "16", "24", "32"], a:"1", e:"2⁴ = 16."},
+{ q: "{5} ⊆ A implica 5 ∈ A?", o:["Sì", "No"], a:"0", e:"Sì! Sono equivalenti."},
+{ q: "È corretto scrivere 42 ∈ {42}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "A × A contiene sempre coppie (a,a)?", o:["Sì", "No"], a:"0", e:"Sì, sempre."},
+{ q: "{1,1,1} è uguale a {1}?", o:["Sì", "No"], a:"0", e:"Sì! Ripetizioni ignorate."},
+{ q: "L'ordine conta negli insiemi?", o:["Sì", "No"], a:"1", e:"No!"},
+{ q: "A = {a,{a}}. a ∈ A?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "A = {a,{a}}. {a} ∈ A?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "A × ∅ è sempre vuoto?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "È corretto scrivere 3 ⊆ {1,2,3}?", o:["Sì", "No"], a:"1", e:"No! Deve essere {3} ⊆ {1,2,3}."},
+{ q: "∅ ⊆ ∅ è vero?", o:["Sì", "No"], a:"0", e:"Sì! Regola aurea."},
+{ q: "In 𝒫({a,b}) c'è sempre ∅?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "In 𝒫({a,b}) c'è sempre {a,b}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "{∅} è l'insieme vuoto?", o:["Sì", "No"], a:"1", e:"No! Contiene un elemento."},
+{ q: "A ∪ A = A sempre?", o:["Sì", "No"], a:"0", e:"Sì, le ripetizioni non contano."},
+{ q: "A ∩ A = A sempre?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "A ∩ ∅ = ?", o:["A", "∅"], a:"1", e:"Sempre ∅."},
+{ q: "A ∪ ∅ = ?", o:["A", "∅"], a:"0", e:"Sempre A."},
+{ q: "A \\ A = ?", o:["A", "∅"], a:"1", e:"Sempre ∅."},
+{ q: "Quanti elementi ha {a} × {b,c}?", o:["1", "2", "3", "4"], a:"1", e:"2 coppie."},
+{ q: "(1,2) è uguale a (2,1)?", o:["Sì", "No"], a:"1", e:"No! L'ordine conta nelle coppie."},
+{ q: "{{1,2,3}} è una partizione di {1,2,3}?", o:["Sì", "No"], a:"0", e:"Sì! Un solo blocco va benissimo."},
+{ q: "{{1},{2},{3}} è una partizione di {1,2,3}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "{{1,2},{2,3}} è una partizione di {1,2,3}?", o:["Sì", "No"], a:"1", e:"No! Intersezione non vuota."},
+{ q: "{ {1,2}, {3}, ∅ } è una partizione?", o:["Sì", "No"], a:"1", e:"No! Contiene ∅."},
+{ q: "L’unione dei blocchi di una partizione deve essere l’insieme di partenza?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "Due blocchi uguali sono ammessi in una partizione?", o:["Sì", "No"], a:"1", e:"No! Intersezione non vuota."},
+{ q: "{a} ⊆ {a} è vero?", o:["Sì", "No"], a:"0", e:"Sì! Riflessività."},
+{ q: "Se A ⊆ B e B ⊆ A allora A = B?", o:["Sì", "No"], a:"0", e:"Sì! Antisimmetria."},
+{ q: "∅ ∈ {∅} è vero?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "∅ ⊆ {∅} è vero?", o:["Sì", "No"], a:"0", e:"Sì! Regola aurea."},
+{ q: "{∅} ⊆ {∅} è vero?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "{∅} ∈ {∅} è vero?", o:["Sì", "No"], a:"1", e:"No!"},
+{ q: "Quanti elementi ha 𝒫({∅,{∅}})?", o:["2", "4", "8"], a:"1", e:"2 elementi → 2² = 4."},
+{ q: "A = {1,2,3}, B = {2,3,4}. A ∩ B = ?", o:["{2,3}", "{1,2,3,4}", "∅"], a:"0", e:"{2,3}."},
+{ q: "A \\ B è sempre uguale a B \\ A?", o:["Sì", "Mai", "Dipende"], a:"2", e:"Dipende! La differenza non è simmetrica."},
+{ q: "Il complemento di ∅ è l’universo U?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "Il complemento di U è ∅?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "∅ × {1,2} ha quanti elementi?", o:["0", "2", "infinito"], a:"0", e:"Sempre 0."},
+{ q: "{1} ∈ 𝒫({1})?", o:["Sì", "No"], a:"0", e:"Sì! 𝒫({1}) = {∅, {1}}."},
+{ q: "1 ∈ 𝒫({1})?", o:["Sì", "No"], a:"1", e:"No! Gli elementi sono insiemi."},
+{ q: "{{∅}} = {∅}?", o:["Sì", "No"], a:"1", e:"No!"},
+{ q: "In una partizione di 5 elementi posso avere 6 blocchi?", o:["Sì", "No"], a:"1", e:"No! Massimo 5."},
+{ q: "{ {1,2}, {3,4,5} } è partizione di {1,2,3,4,5}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "{1,2,3} = {3,1,2}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "{1,1,2,2} = {1,2}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "⊆ significa sottoinsieme proprio?", o:["Sì", "No"], a:"1", e:"No! ⊆ ammette anche l’uguale."},
+{ q: "∅ ⊂ ∅ è vero?", o:["Sì", "No"], a:"1", e:"No! Sottoinsieme proprio richiede differenza."},
+{ q: "Se A ⊆ B e A ≠ B allora A ⊂ B?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "Un insieme con 3 elementi ha 7 sottoinsiemi propri?", o:["Sì", "No"], a:"0", e:"8 totali – 1 = 7 propri."},
+{ q: "L'insieme delle parti contiene sempre ∅?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "A = {∅} ha 1 elemento?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "𝒫(A) contiene sempre A?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "|A × B| = |A| × |B| per insiemi finiti?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "(a,b) ∈ B × A implica a ∈ A e b ∈ B?", o:["Sì", "No"], a:"1", e:"No! L’ordine è invertito."},
+{ q: "{1,2} × {3} ha 2 coppie?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "Può succedere A ∩ B = A?", o:["Sì", "No"], a:"0", e:"Sì, se A ⊆ B."},
+{ q: "Può succedere A ∪ B = B?", o:["Sì", "No"], a:"0", e:"Sì, se A ⊆ B."},
+{ q: "A \\ B = A ∩ Bᶜ?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "I blocchi di una partizione devono essere non vuoti?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "L’unione dei blocchi deve essere l’insieme originale?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "I blocchi devono essere pairwise disgiunti?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "{∅, {∅}} ha 2 elementi distinti?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "𝒫({∅, {∅}}) ha 4 elementi?", o:["Sì", "No"], a:"0", e:"Sì! 2² = 4."},
+{ q: "∅ ∈ 𝒫(∅)?", o:["Sì", "No"], a:"0", e:"Sì! 𝒫(∅) = {∅}."},
+{ q: "∅ ⊆ {∅, {∅}}?", o:["Sì", "No"], a:"0", e:"Sì! Regola aurea."},
+{ q: "{∅} ⊆ {∅, {∅}}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "{{∅}} ⊆ {∅, {∅}}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "∅ ∈ {∅, {∅}}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "{∅} ∈ {∅, {∅}}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "{{∅}} ∈ {∅, {∅}}?", o:["Sì", "No"], a:"1", e:"No!"},
+{ q: "L'insieme vuoto è l’unico senza elementi ma sottoinsieme di sé?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "Un insieme può contenere sé stesso (teoria standard ZFC)?", o:["Sì", "No"], a:"1", e:"No! Vietato per evitare paradossi."},
+{ q: "Un insieme con 0 elementi ha 1 sottoinsieme?", o:["Sì", "No"], a:"0", e:"Sì, solo sé stesso."},
+{ q: "2^n è il numero di sottoinsiemi di un insieme con n elementi?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "10 elementi → 1024 sottoinsiemi?", o:["Sì", "No"], a:"0", e:"Sì! 2¹⁰ = 1024."},
+{ q: "{1} ∪ {1} = {1}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "{1,2} ∩ {2,1} = {1,2}?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "A \\ ∅ = A?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "A ∩ U = A?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "A ∪ U = U?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "(Aᶜ)ᶜ = A?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "Le partizioni corrispondono alle relazioni di equivalenza?", o:["Sì", "No"], a:"0", e:"Sì! Teorema fondamentale."},
+{ q: "{1,2,3} ha 5 partizioni diverse?", o:["Sì", "No"], a:"0", e:"Sì! Numero di Bell B₃ = 5."},
+{ q: "5 ∈ A ⇔ {5} ⊆ A?", o:["Sì", "No"], a:"0", e:"Sì! Equivalenti."},
+{ q: "{5} ∈ A significa che 5 è un insieme dentro A?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "L'insieme delle parti si chiama anche power set?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "Si possono avere coppie ordinate dentro un insieme?", o:["Sì", "No"], a:"0", e:"Sì! Esempio {(1,2),(3,4)}."},
+{ q: "∅ ∈ ∅ è vero?", o:["Sì", "No"], a:"1", e:"No!"},
+{ q: "{∅} ⊆ ∅ è vero?", o:["Sì", "No"], a:"1", e:"No! {∅} ha un elemento."},
+{ q: "{{a},{b}} e {a,b} hanno lo stesso numero di elementi?", o:["Sì", "No"], a:"0", e:"Sì, entrambi 2."},
+{ q: "I blocchi di una partizione possono sovrapporsi?", o:["Sì", "No"], a:"1", e:"No!"},
+{ q: "A × ∅ ha sempre 0 elementi?", o:["Sì", "No"], a:"0", e:"Sì!"},
+{ q: "Dopo 100 quiz sei pronto/a per l’esame?", o:["No, ne voglio altri 100", "SÌ, DOMINO TUTTO!"], a:"1", e:"Esatto! Vai e prendi 30 e lode!"}
+];
+
+// Generazione quiz
+let html = "";
+let correctCount = 0;
+let answered = 0;
+
+questions.forEach((qz, i) => {
+    const n = i + 1;
+    html += `<div class="quiz">
+        <div class="question">${n}. ${qz.q}</div>`;
+    qz.o.forEach((opt, j) => {
+        html += `<label><input type="radio" name="q${n}" value="${j}"> ${opt}</label>`;
+    });
+    html += `<button onclick="check(${i}, '${qz.a}', this)">Controlla</button>
+             <div class="result" id="r${i}"></div></div>`;
+});
+document.getElementById("quizzes").innerHTML = html;
+
+// Controllo risposta
+function check(idx, correct, btn) {
+    const sel = document.querySelector(`input[name="q${idx+1}"]:checked`);
+    if (!sel) { alert("Scegli una risposta!"); return; }
+    const val = sel.value;
+    const div = document.getElementById("r"+idx);
+    div.style.display = "block";
+    btn.disabled = true;
+    answered++;
+    if (val === correct) {
+        div.className = "result correct";
+        div.innerHTML = "CORRETTO! ";
+        correctCount++;
+    } else {
+        div.className = "result wrong";
+        div.innerHTML = "SBAGLIATO. ";
+    }
+    div.innerHTML += `<div class="explanation">${questions[idx].e}</div>`;
+    updateScore();
+}
+
+function updateScore() {
+    document.getElementById("score").innerHTML = `Punteggio: ${correctCount} / ${answered} (Totale: 100)`;
+    if (answered === 100) {
+        const f = document.getElementById("finalResult");
+        f.style.display = "block";
+        let msg = `FINITO! ${correctCount}/100<br>`;
+        if (correctCount >= 95) msg += "SEI UN MOSTRO!";
+        else if (correctCount >= 85) msg += "30 E LODE SICURO!";
+        else if (correctCount >= 70) msg += "Ottimo, ma rifai gli errori!";
+        else msg += "Torna a studiare gli sbagli!";
+        f.innerHTML = msg;
+    }
+}
+</script>
+
+<div style="text-align:center; margin:60px; font-size:3em; color:#27ae60;">
+    IN BOCCA AL LUPO!<br>SPACCA L’ESAME!
+</div>
+</body>
+</html>
